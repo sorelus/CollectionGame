@@ -1,10 +1,11 @@
-TP1 TEST DE VALIDATION DES ACQUIS
+TP2 TEST DE VALIDATION DES ACQUIS
 =================
 
 Outils de developpement
 -----------------
  * Maven 3
- * Java 8
+ * Java 8 (spring boot version 2.0 (Spring Framework 5))
+
 
 Compilation et execution du projet
 -----------------
@@ -14,9 +15,9 @@ Compilation et execution du projet
 * Installer Maven 3 ( >3.2)
 
 * Compilation
-	* cd tp1
+	* cd sorelTP2
 	* mvn clean pakage
 
 * Executer
-	* java -jar target/tp1-1.0.jar
+	* java -jar target//sorel.tp2-0.0.1.jar
 
