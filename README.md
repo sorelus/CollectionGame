@@ -18,6 +18,6 @@ Installer java (jdk 8)
 	* cd tp1
 	* mvn clean pakage
 
-### executer
- java -jar target/tp1-1.0.jar
+* Executer
+	* java -jar target/tp1-1.0.jar
 
