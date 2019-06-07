@@ -14,9 +14,9 @@ Compilation et execution du projet
 * Installer Maven 3 ( >3.2)
 
 * Compilation
-	* cd tp1
-	* mvn clean pakage
+	cd tp1
+	mvn clean pakage
 
 * Executer
-	* java -jar target/tp1-1.0.jar
+	java -jar target/tp1-1.0.jar
 
