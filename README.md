@@ -9,13 +9,14 @@ Outils de developpement
 compilation et execution du projet
 -----------------
 
-### Installer java (jdk 8)
+Installer java (jdk 8)
+-----------------
 
-### Installer Maven 3 ( >3.2)
+* Installer Maven 3 ( >3.2)
 
-### Compilation
-* cd tp1
-* mvn clean pakage
+* Compilation
+	* cd tp1
+	* mvn clean pakage
 
 ### executer
  java -jar target/tp1-1.0.jar
