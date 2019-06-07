@@ -6,7 +6,7 @@ Outils de developpement
  * Maven 3
  * Java 8
 
-compilation et execution du projet
+Compilation et execution du projet
 -----------------
 
 * Installer java (jdk 8)
