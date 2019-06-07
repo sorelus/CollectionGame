@@ -1,9 +1,12 @@
 
 # Intellij
-tp1/.idea/*
-tp1/*.iml
-tp1/*.iws
+*/.idea/*
+*.iml/*
+*.iws/*
+
 
 # Maven
-tp1/*/log/
-tp1/*/target/
+*/log/*
+*/target/*
+*/log/*
+*/target/*
