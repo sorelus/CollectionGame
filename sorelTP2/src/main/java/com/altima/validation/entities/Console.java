@@ -1,22 +1,32 @@
 package com.altima.validation.entities;
 
 
-import org.springframework.context.annotation.Bean;
-
 import java.util.Date;
 
+/**
+ * Console class
+ * @author sorelus Mkounga
+ */
 
 public class Console {
-    private String nom,fabricant;
+    private String nom;
+    private String fabricant;
     private Date dateDeSortie;
-    private int nombreDeBits;
+    private int bits;
 
 
-    public Console(String nom, String fabricant, Date dateDeSortie, int nombreDeBits) {
+    /**
+     *  Console contructeur
+     * @param nom  console name
+     * @param fabricant console constructor
+     * @param dateDeSortie create date
+     * @param bits console bit
+     */
+    public Console(String nom, String fabricant, Date dateDeSortie, int bits) {
         this.nom = nom;
         this.fabricant = fabricant;
         this.dateDeSortie = dateDeSortie;
-        this.nombreDeBits = nombreDeBits;
+        this.bits = bits;
     }
 
 
@@ -29,13 +39,7 @@ public class Console {
         this.nom = nom;
     }
 
-    public String getFabricant() {
-        return fabricant;
-    }
 
-    public void setFabricant(String fabricant) {
-        this.fabricant = fabricant;
-    }
 
     public Date getDateDeSortie() {
         return dateDeSortie;
@@ -45,11 +49,33 @@ public class Console {
         this.dateDeSortie = dateDeSortie;
     }
 
-    public int getNombreDeBits() {
-        return nombreDeBits;
+    public String getFabricant() {
+        return fabricant;
     }
 
-    public void setNombreDeBits(int nombreDeBits) {
-        this.nombreDeBits = nombreDeBits;
+    public void setFabricant(String fabricant) {
+        this.fabricant = fabricant;
+    }
+
+    public int getBits() {
+        return bits;
+    }
+
+    public void setBits(int bits) {
+        this.bits = bits;
+    }
+
+    /**
+     *  redefine toString function
+     * @return To return console info
+     */
+    @Override
+    public String toString() {
+        return "Console{" +
+                "nom='" + nom + '\'' +
+                ", fabricant='" + fabricant + '\'' +
+                ", dateDeSortie=" + dateDeSortie +
+                ", bits=" + bits +
+                '}';
     }
 }
