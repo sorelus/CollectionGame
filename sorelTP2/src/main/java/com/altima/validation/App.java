@@ -1,5 +1,8 @@
 package com.altima.validation;
 
+import com.altima.validation.entities.Console;
+import com.altima.validation.entities.JeuVideo;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -17,8 +20,10 @@ public class App  implements CommandLineRunner
         SpringApplication.run(App.class, args);
     }
 
+
     @Override
     public void run(String... args) throws Exception {
-        System.out.println("Bonjour Sorel");
+        System.out.println("TP 2 version 0");
+
     }
 }
