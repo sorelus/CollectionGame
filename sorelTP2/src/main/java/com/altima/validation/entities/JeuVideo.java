@@ -1,17 +1,40 @@
 package com.altima.validation.entities;
 
 
+import javax.persistence.*;
 import java.util.Date;
 /**
  * JeuVideo class
  * @author sorelus Mkounga
  */
+@Entity // This tells Hibernate to make a table out of this class
 public class JeuVideo {
+
+
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private Integer id;
+
+
+
+    @Column(unique = true)
     private String nom;
+
+
     private String editeur;
+
+
     private Date dateDeSortie;
+
+    @ManyToOne
+    @JoinColumn
     private Console console;
 
+
+
+    // constructor use by JPA/Hibernate to instance new console
+    public JeuVideo() {
+    }
 
     /**
      * JeuVideo constructor
@@ -26,7 +49,10 @@ public class JeuVideo {
         this.dateDeSortie = dateDeSortie;
         this.console = console;
     }
-
+    /*
+     * begin define Getters and setters
+     *
+     */
     public String getNom() {
         return nom;
     }
@@ -58,6 +84,17 @@ public class JeuVideo {
     public void setConsole(Console console) {
         this.console = console;
     }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+    /*
+     * END define getters and setters
+     */
 
     /**
      *  redefine toString function

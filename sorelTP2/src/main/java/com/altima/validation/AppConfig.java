@@ -8,8 +8,6 @@ import org.springframework.context.annotation.Configuration;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
-
 
 /**
  * This class is our configuration class. We will declare our beans here.
