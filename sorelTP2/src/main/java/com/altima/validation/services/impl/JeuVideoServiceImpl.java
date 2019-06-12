@@ -48,4 +48,9 @@ public class JeuVideoServiceImpl implements JeuVideoService {
     public void saveAllJeux(List<JeuVideo> jeux) {
         jeuVideoRepository.saveAll(jeux);
     }
+
+    @Override
+    public JeuVideo getJeuById(int id) {
+        return jeuVideoRepository.getOne(id);
+    }
 }

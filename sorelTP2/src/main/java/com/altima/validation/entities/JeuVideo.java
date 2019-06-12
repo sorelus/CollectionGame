@@ -1,6 +1,8 @@
 package com.altima.validation.entities;
 
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 /**
@@ -23,7 +25,8 @@ public class JeuVideo {
 
     private String editeur;
 
-
+    /* handles data-binding (parsing) and display for spring form tld o*/
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date dateDeSortie;
 
     @ManyToOne
@@ -46,6 +49,7 @@ public class JeuVideo {
     public JeuVideo(String nom, String editeur, Date dateDeSortie, Console console) {
         this.nom = nom;
         this.editeur = editeur;
+
         this.dateDeSortie = dateDeSortie;
         this.console = console;
     }

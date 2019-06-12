@@ -39,6 +39,12 @@ public class ConsoleServiceImp implements ConsoleService {
     public Console getConsoleByName(String name) {
         return consoleRepository.getByName(name);
     }
+
+    @Override
+    public Console getConsoleId(int id) {
+        return consoleRepository.getOne(id);
+    }
+
     /**
      * @see com.altima.validation.services.ConsoleService#saveAllConsoles(List<Console> )
      */

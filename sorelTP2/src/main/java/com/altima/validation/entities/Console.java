@@ -1,6 +1,8 @@
 package com.altima.validation.entities;
 
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -21,6 +23,8 @@ public class Console  {
 
     private String fabricant;
 
+    /* handles data-binding (parsing) and display for spring form tld o*/
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date dateDeSortie;
 
     private int bits;

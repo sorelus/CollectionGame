@@ -32,4 +32,13 @@ public interface JeuVideoService {
      * @param jeux list of JeuVideo to save
      */
     void saveAllJeux(List<JeuVideo> jeux) ;
+
+
+    /**
+     * get an specific JeuVideo identify by id
+     * @param id id of specific JeuVideo that we want to get
+     * @return JeuVideo information return by DB
+     */
+    JeuVideo getJeuById(int id);
+
 }

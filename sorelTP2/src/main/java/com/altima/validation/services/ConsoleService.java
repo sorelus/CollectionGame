@@ -15,6 +15,7 @@ public interface ConsoleService {
      */
     void saveConsole(Console console);
 
+
     /**
      * get all console order by create date
      * @return sort consoles
@@ -27,6 +28,14 @@ public interface ConsoleService {
      * @return console information return by DB
      */
     Console getConsoleByName(String name);
+
+    /**
+     * get an specific console identify by id
+     * @param id id of specific console that we want to get
+     * @return console information return by DB
+     */
+    Console getConsoleId(int id);
+
 
     /**
      * save list of console
