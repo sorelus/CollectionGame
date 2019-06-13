@@ -16,8 +16,9 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="/create_jeu">Create/Editer</a>
+                    <a class="dropdown-item" href="/find_jeu">Chercher</a>
                     <a class="dropdown-item" href="/list_jeu">Lister</a>
-                    <a class="dropdown-item" href="/lier_jeu">lier à une console </a>
+                    <a class="dropdown-item" href="/lier_jeu">Lier à une console </a>
                 </div>
             </li>
             <li class="nav-item dropdown">
@@ -26,6 +27,7 @@
                 </a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                     <a class="dropdown-item" href="/create_console">Create/Editer</a>
+                    <a class="dropdown-item" href="/find_console">Chercher</a>
                     <a class="dropdown-item" href="/list_console">Lister</a>
                 </div>
             </li>

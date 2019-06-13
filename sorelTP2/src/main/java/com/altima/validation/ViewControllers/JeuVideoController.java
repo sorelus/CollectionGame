@@ -96,4 +96,19 @@ public class JeuVideoController {
         model.addAttribute("jeuSave",jeuSave);
         return "jeu/lier_console";
     }
+
+    @GetMapping({"/find_jeu"})
+    public String find(Model model,@RequestParam (value="jeu", required=false)String jeuName) {
+        JeuVideo jeuVideo = null;
+        if(jeuName!=null && jeuName.length()!=0){
+            jeuVideo = jeuVideoService.getJeuByName(jeuName);
+            if(jeuVideo!=null){
+                model.addAttribute("find",true);
+            }else
+                model.addAttribute("find",false);
+        }
+        model.addAttribute("select",jeuVideo);
+
+        return "jeu/search_jeu";
+    }
 }

@@ -62,5 +62,19 @@ public class ConsoleController {
         return "console/list_consoles";
     }
 
+    @GetMapping({"/find_console"})
+    public String find(Model model,@RequestParam (value="console", required=false)String consoleName) {
+        Console console = null;
+        if(consoleName!=null && consoleName.length()!=0){
+            console = consoleService.getConsoleByName(consoleName);
+            if(console!=null){
+                model.addAttribute("find",true);
+            }else
+                model.addAttribute("find",false);
+        }
+        model.addAttribute("select",console);
+
+        return "console/search_console";
+    }
 
 }

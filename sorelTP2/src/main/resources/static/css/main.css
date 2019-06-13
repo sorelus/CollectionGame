@@ -41,3 +41,5 @@
 hr.barre {
     border-top: 2px solid black;
 }
+
+.solid {border-style: solid;}
