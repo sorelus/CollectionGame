@@ -17,7 +17,7 @@ Compilation et execution du projet
 * Installer Mysql 5.6
     * Creer une DB : games_db
     * Creer un utilsateur avec des access complets sur cette DB 
-    <br/>
+   
     <b>user </b>: admin
     <br/>
     <b>pass </b> :sorelus50 
