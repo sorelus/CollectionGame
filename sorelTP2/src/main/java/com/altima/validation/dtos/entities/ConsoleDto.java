@@ -1,40 +1,41 @@
-package com.altima.validation.entities;
+package com.altima.validation.dtos.entities;
+
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import java.util.Date;
 
 /**
- * Console class
+ * ConsoleDto class use like a mapper version of Console entity
+ *
  * @author sorelus Mkounga
  */
 
-@Entity // This tells Hibernate to make a table out of this class
-public class Console  {
-
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+public class ConsoleDto {
     private Integer id;
 
-    @Column(unique = true)
     private String nom;
 
     private String fabricant;
 
+    /* handles data-binding (parsing) and display for spring form tld o*/
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date dateDeSortie;
 
     private int bits;
 
-    // constructor use by JPA/Hibernate to instance new console
-    public Console() {
+    public ConsoleDto() {
     }
 
     /**
-     *  Console contructeur
+     *  ConsoleDto contructeur
      * @param nom  console name
      * @param fabricant console constructor
      * @param dateDeSortie create date
      * @param bits console bit
      */
-    public Console(String nom, String fabricant, Date dateDeSortie, int bits) {
+    public ConsoleDto(String nom, String fabricant, Date dateDeSortie, int bits) {
         this.nom = nom;
         this.fabricant = fabricant;
         this.dateDeSortie = dateDeSortie;
@@ -53,8 +54,6 @@ public class Console  {
     public void setNom(String nom) {
         this.nom = nom;
     }
-
-
 
     public Date getDateDeSortie() {
         return dateDeSortie;
@@ -92,11 +91,11 @@ public class Console  {
      */
     /**
      *  redefine toString function
-     * @return To return console info
+     * @return To return consoleDto info
      */
     @Override
     public String toString() {
-        return "Console{" +
+        return "ConsoleDto{" +
                 "nom='" + nom + '\'' +
                 ", fabricant='" + fabricant + '\'' +
                 ", dateDeSortie=" + dateDeSortie +

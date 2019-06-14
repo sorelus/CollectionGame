@@ -1,46 +1,39 @@
-package com.altima.validation.entities;
-import javax.persistence.*;
+package com.altima.validation.dtos.entities;
+import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
+
 /**
- * JeuVideo class
+ * JeuVideoDto class use like a mapper version of jeuvideo entity
  * @author sorelus Mkounga
  */
-@Entity // This tells Hibernate to make a table out of this class
-public class JeuVideo {
 
+public class JeuVideoDto {
 
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
 
-
-
-    @Column(unique = true)
     private String nom;
 
 
     private String editeur;
 
+    /* handles data-binding (parsing) and display for spring form tld o*/
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date dateDeSortie;
 
-    @ManyToOne
-    @JoinColumn
-    private Console console;
+    private ConsoleDto console;
 
 
-
-    // constructor use by JPA/Hibernate to instance new console
-    public JeuVideo() {
+    public JeuVideoDto() {
     }
 
     /**
-     * JeuVideo constructor
+     * JeuVideoDto constructor
      * @param nom jeuVideo name
      * @param editeur jeuVideo editor
      * @param dateDeSortie create date
      * @param console console platform for play
      */
-    public JeuVideo(String nom, String editeur, Date dateDeSortie, Console console) {
+    public JeuVideoDto(String nom, String editeur, Date dateDeSortie, ConsoleDto console) {
         this.nom = nom;
         this.editeur = editeur;
 
@@ -75,11 +68,11 @@ public class JeuVideo {
         this.dateDeSortie = dateDeSortie;
     }
 
-    public Console getConsole() {
+    public ConsoleDto getConsole() {
         return console;
     }
 
-    public void setConsole(Console console) {
+    public void setConsole(ConsoleDto console) {
         this.console = console;
     }
 
@@ -96,11 +89,11 @@ public class JeuVideo {
 
     /**
      *  redefine toString function
-     * @return To return jeuVideo info
+     * @return To return jeuVideoDto info
      */
     @Override
     public String toString() {
-        return "JeuVideo{" +
+        return "JeuVideoDto{" +
                 "nom='" + nom + '\'' +
                 ", editeur='" + editeur + '\'' +
                 ", dateDeSortie=" + dateDeSortie +

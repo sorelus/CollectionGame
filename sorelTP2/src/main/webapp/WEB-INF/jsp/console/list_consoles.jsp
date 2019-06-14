@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,17 +14,17 @@
 <%@ include file="../part/menu.jsp" %>
 <div class="col-sm-12">
     <div class="alert alert-secondary ">
-        <strong>liste des consoles par date de creation</strong>.
+        <strong><spring:message code="console.list.title"/></strong>
     </div>
 
     <table class="table table-bordered" >
         <thead class="thead-dark">
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Nom</th>
-            <th scope="col">Fabricant</th>
-            <th scope="col">bits</th>
-            <th scope="col">Date de sortie</th>
+            <th scope="col"><spring:message code="console.creer.nom.value"/></th>
+            <th scope="col"><spring:message code="console.creer.fabricant.value"/></th>
+            <th scope="col"><spring:message code="console.creer.bits.value"/></th>
+            <th scope="col"><spring:message code="console.creer.date.value"/></th>
         </tr>
         </thead>
         <tbody>

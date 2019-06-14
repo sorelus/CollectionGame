@@ -1,3 +1,4 @@
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +13,9 @@
         <%@ include file="part/menu.jsp" %>
         <div class="col-sm-12">
 
-            <h2><p class="bienvenue write">Bienvenue sur l'application de gestion des collections de jeux video</p></h2>
+            <h2><p class="bienvenue write"> <spring:message code="welcome" /></p></h2>
+
+
             <img src="images/game.png" class="displayed" />
            <%-- <img src="images/bienvenue.png" style="   width: 80%;height: auto; margin-left: auto; margin-right: auto;"/>--%>
         </div>

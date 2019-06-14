@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,18 +15,18 @@
 <%@ include file="../part/menu.jsp" %>
 <div class="col-sm-12">
     <div class="alert alert-secondary ">
-        <strong>Chercher une console</strong>.
+        <strong><spring:message code="console.search.title"/></strong>
     </div>
 
     <form method="GET"
           action="/find_console" >
-        <label for="search">Nom de la console</label>
+        <label for="search"><spring:message code="console.search.nom"/></label>
         <div class="input-group mb-2 mr-sm-2">
             <input type="text" class="form-control" id="search"  name="console" placeholder=""/>
-            <button type="submit" class="btn btn-secondary">chercher</button>
+            <button type="submit" class="btn btn-secondary"><spring:message code="console.search.button.value"/></button>
         </div>
         <small id="searchHelpBlock" class="form-text text-muted">
-           Veillez vous assurez de bien entrer le nom <b>( ce champ est sensible  à la case)</b>
+            <spring:message code="console.search.info.value"/>
         </small>
     </form>
     <hr class="barre"/>
@@ -35,30 +36,29 @@
             <c:set var = "alertType"
                    value = "alert-danger"
                    scope="page" />
-            <c:set var = "alertMessage"
-                   value = " <strong>Oups...!</strong> Cette console n'existe pas encore en DB"
-                   scope="page" />
+
+        <spring:message code="console.search.error.value" var="alertMessage" scope="page"/>
 
         <div class="alert ${alertType}">
                 ${alertMessage}
         </div>
     </c:if>
         <div class="form-group">
-            <label for="nom">Nom</label>
+            <label for="nom"><spring:message code="console.creer.nom.value"/></label>
             <label id="nom" class="form-control" >${select.nom}</label>
 
         </div>
         <div class="form-group">
-            <label for="fabricant">Fabricant</label>
+            <label for="fabricant"><spring:message code="console.creer.fabricant.value"/></label>
             <label id="fabricant" class="form-control">${select.fabricant}</label>
         </div>
         <div class="form-group">
-            <label for="bits">bits</label>
+            <label for="bits"><spring:message code="console.creer.bits.value"/></label>
             <label id="bits" class="form-control">${select.bits}</label>
         </div>
 
         <div class="form-group">
-            <label for="dateDeSortie">Date de sortie</label>
+            <label for="dateDeSortie"><spring:message code="console.creer.date.value"/></label>
             <label id="dateDeSortie" class="form-control">${select.dateDeSortie}</label>
        </div>
 

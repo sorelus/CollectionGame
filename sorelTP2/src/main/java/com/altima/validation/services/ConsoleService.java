@@ -1,6 +1,6 @@
 package com.altima.validation.services;
 
-import com.altima.validation.entities.Console;
+import com.altima.validation.dtos.entities.ConsoleDto;
 
 import java.util.List;
 /**
@@ -13,33 +13,33 @@ public interface ConsoleService {
      * save one console to DB
      * @param console , console to save
      */
-    void saveConsole(Console console);
+    void saveConsole(ConsoleDto console);
 
 
     /**
      * get all console order by create date
      * @return sort consoles
      */
-    List<Console> getAllOrderByDate ();
+    List<ConsoleDto> getAllOrderByDate ();
 
     /**
      * get an specific console identify by name
      * @param name name of specific console that we want to get
      * @return console information return by DB
      */
-    Console getConsoleByName(String name);
+    ConsoleDto getConsoleByName(String name);
 
     /**
      * get an specific console identify by id
      * @param id id of specific console that we want to get
      * @return console information return by DB
      */
-    Console getConsoleId(int id);
+    ConsoleDto getConsoleId(int id);
 
 
     /**
      * save list of console
      * @param consoles list of console to save
      */
-    void saveAllConsoles(List<Console> consoles);
+    void saveAllConsoles(List<ConsoleDto> consoles);
 }

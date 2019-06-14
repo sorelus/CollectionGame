@@ -4,8 +4,8 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.altima.validation</groupId>
   <artifactId>sorel.tp2</artifactId>
-  <version>0.0.1</version>
-  <packaging>jar</packaging>
+  <version>0.0.3</version>
+  <packaging>war</packaging>
   <name>Game-Collection</name>
   <description>Tp pour la validation des acquis by Sorel</description>
   <parent>
@@ -19,6 +19,9 @@
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     <java.version>1.8</java.version>
+    <org.mapstruct.version>1.2.0.Final</org.mapstruct.version>
+    <org.projectlombok.version>1.18.2</org.projectlombok.version>
+    <org.apache.maven.plugins.version>3.6.0</org.apache.maven.plugins.version>
   </properties>
   <dependencies>
     <dependency>
@@ -74,6 +77,7 @@
       <groupId>taglibs</groupId>
       <artifactId>standard</artifactId>
       <scope>runtime</scope>
+      <version>1.1.2</version>
     </dependency>
 
      <!--auto restart-->
@@ -83,12 +87,41 @@
       <optional>true</optional>
     </dependency>
 
+   <!-- for mapper entities to entitiesDto-->
+    <dependency>
+      <groupId>org.mapstruct</groupId>
+      <artifactId>mapstruct-jdk8</artifactId>
+      <version>${org.mapstruct.version}</version>
+    </dependency>
+
   </dependencies>
   <build>
     <plugins>
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
+      </plugin>
+
+      <!-- for mapper entities to entitiesDto-->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>${org.apache.maven.plugins.version}</version>
+        <configuration>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
+          <annotationProcessorPaths>
+            <path>
+              <groupId>org.mapstruct</groupId>
+              <artifactId>mapstruct-processor</artifactId>
+              <version>${org.mapstruct.version}</version>
+            </path>
+          </annotationProcessorPaths>
+          <compilerArgs>
+            <arg>-Amapstruct.suppressGeneratorTimestamp=true</arg>
+            <arg>-Amapstruct.defaultComponentModel=spring</arg>
+          </compilerArgs>
+        </configuration>
       </plugin>
     </plugins>
   </build>

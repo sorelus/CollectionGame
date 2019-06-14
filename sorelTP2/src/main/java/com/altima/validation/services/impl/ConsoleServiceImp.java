@@ -1,6 +1,7 @@
 package com.altima.validation.services.impl;
 
-import com.altima.validation.entities.Console;
+import com.altima.validation.dtos.entities.ConsoleDto;
+import com.altima.validation.dtos.mappers.ConsoleMapper;
 import com.altima.validation.repositories.ConsoleRepository;
 import com.altima.validation.services.ConsoleService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,41 +18,43 @@ public class ConsoleServiceImp implements ConsoleService {
     @Autowired
     ConsoleRepository consoleRepository;
 
+    @Autowired
+    ConsoleMapper consoleMapper;
 
     /**
-     * @see com.altima.validation.services.ConsoleService#saveConsole(Console)
+     * @see com.altima.validation.services.ConsoleService#saveConsole(ConsoleDto)
      */
     @Override
-    public void saveConsole(Console console) {
-        consoleRepository.save(console);
+    public void saveConsole(ConsoleDto console) {
+        consoleRepository.save(consoleMapper.toEntity(console));
     }
     /**
      * @see com.altima.validation.services.ConsoleService#getAllOrderByDate()
      */
     @Override
-    public List<Console> getAllOrderByDate() {
-        return consoleRepository.getByDateDeSortie();
+    public List<ConsoleDto> getAllOrderByDate() {
+        return consoleMapper.toDtos(consoleRepository.getByDateDeSortie());
     }
     /**
      * @see com.altima.validation.services.ConsoleService#getConsoleByName(String )
      */
     @Override
-    public Console getConsoleByName(String name) {
-        return consoleRepository.getByName(name);
+    public ConsoleDto getConsoleByName(String name) {
+        return consoleMapper.toDto(consoleRepository.getByName(name));
     }
 
     @Override
-    public Console getConsoleId(int id) {
-        return consoleRepository.getOne(id);
+    public ConsoleDto getConsoleId(int id) {
+        return consoleMapper.toDto(consoleRepository.getOne(id));
     }
 
     /**
-     * @see com.altima.validation.services.ConsoleService#saveAllConsoles(List<Console> )
+     * @see com.altima.validation.services.ConsoleService#saveAllConsoles(List<ConsoleDto> )
      */
     @Override
-    public void saveAllConsoles(List<Console> consoles)  {
+    public void saveAllConsoles(List<ConsoleDto> consoles)  {
 
-            consoleRepository.saveAll(consoles);
+       consoleRepository.saveAll( consoleMapper.toEntities(consoles));
 
 
     }

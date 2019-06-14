@@ -1,11 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Console</title>
+    <title>JeuVideo</title>
     <link href="/css/bootstrap.css" rel="stylesheet"/>
     <link href="/css/main.css" rel="stylesheet"/>
     <link rel="icon" href="images/app-box.png">
@@ -14,23 +15,23 @@
 <%@ include file="../part/menu.jsp" %>
 <div class="col-sm-12">
     <div class="alert alert-secondary ">
-        <strong>Creer ou editer un jeu video</strong>.
+        <strong><spring:message code="jeu.creer.title" /></strong>.
     </div>
 
     <form method="GET"
           action="/create_jeu" >
-        <label for="search">Jeux enregistrées</label>
+        <label for="search"><spring:message code="jeu.creer.enregistrer" /></label>
         <div class="input-group mb-2 mr-sm-2">
             <select name="jeu" class="custom-select " id="search">
-                <option selected>Creer un jeu</option>
+                <option selected><spring:message code="jeu.creer.creer" /></option>
                 <c:forEach items="${jeux}" var="jeu">
-                    <option value="${jeu.nom}" ${jeu == editJeu ? 'selected' : ''}>${jeu.nom}</option>
+                    <option value="${jeu.nom}" ${jeu.id == editJeu.id ? 'selected' : ''}>${jeu.nom}</option>
                 </c:forEach>
             </select>
-            <button type="submit" class="btn btn-secondary">Charger</button>
+            <button type="submit" class="btn btn-secondary"><spring:message code="jeu.creer.boutoncharger" /></button>
         </div>
         <small id="searchHelpBlock" class="form-text text-muted">
-            Vous pouvez editer un jeu en selectionnant le jeu et en cliquant sur <b>charger</b>
+            <spring:message code="jeu.creer.indication" />
         </small>
     </form>
     <hr class="barre"/>
@@ -40,16 +41,12 @@
         <c:set var = "alertType"
                value = "alert-success"
                scope="page" />
-        <c:set var = "alertMessage"
-               value = " <strong>Correct!</strong> Votre enregistrement a été pris en compte."
-               scope="page" />
+        <spring:message code="jeu.creer.correct" var="alertMessage"/>
         <c:if test="${!jeuSave}">
             <c:set var = "alertType"
                    value = "alert-danger"
                    scope="page" />
-            <c:set var = "alertMessage"
-                   value = " <strong>Oups...!</strong> problème avec votre enregistrement, verifiez que le jeu que vous essayez de creer n'existe pas deja"
-                   scope="page" />
+            <spring:message code="jeu.creer.error" var="alertMessage"/>
         </c:if>
 
         <div class="alert ${alertType}">
@@ -60,21 +57,23 @@
     <form:form method="POST"
                action="/create_jeu" modelAttribute="editJeu">
         <div class="form-group">
-            <label for="nom">Nom</label>
-            <form:input path="nom" class="form-control" id="nom" placeholder="Entrez le nom du jeu"/>
+            <label for="nom"> <spring:message code="jeu.creer.nom.value" /></label>
+            <spring:message code="jeu.creer.nom.placeholder" var="placeholder" />
+            <form:input path="nom" class="form-control" id="nom" placeholder='${placeholder}'/>
         </div>
         <div class="form-group">
-            <label for="editeur">Editeur</label>
-            <form:input path="editeur" class="form-control" id="editeur" placeholder="editeur" name="editeur" />
+            <label for="editeur"><spring:message code="jeu.creer.fabricant.value" /></label>
+            <spring:message code="jeu.creer.fabricant.placeholder" var="placeholder" />
+            <form:input path="editeur" class="form-control" id="editeur" placeholder='${placeholder}' name="editeur" />
         </div>
 
         <div class="form-group">
-            <label for="dateDeSortie">Date de sortie</label>
+            <label for="dateDeSortie"><spring:message code="console.creer.date.value" /></label>
             <form:input path="dateDeSortie" type="date"    class="form-control date" id="dateDeSortie" placeholder="Entrez la date de creation du jeu" name="dateDeSortie" />
         </div>
         <form:input type="hidden"  name="id" path="id"/>
-        <form:input type="hidden"  name="id" path="console"/>
-        <button type="submit" class="btn btn-secondary btn-block">Enregister</button>
+
+        <button type="submit" class="btn btn-secondary btn-block"><spring:message code="console.creer.button.enregistrer.value" /></button>
 
         <br/><br/>
     </form:form>

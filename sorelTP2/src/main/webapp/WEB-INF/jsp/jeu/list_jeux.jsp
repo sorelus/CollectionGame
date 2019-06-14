@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>List Jeux</title>
+    <title>Jeux</title>
     <link href="/css/bootstrap.css" rel="stylesheet"/>
     <link href="/css/main.css" rel="stylesheet"/>
     <link rel="icon" href="images/app-box.png">
@@ -13,17 +14,17 @@
 <%@ include file="../part/menu.jsp" %>
 <div class="col-sm-12">
     <div class="alert alert-secondary ">
-        <strong>liste des jeux  par console puis par date de creation</strong>.
+        <strong><spring:message code="jeu.list.title" /></strong>.
     </div>
 
     <table class="table table-bordered" >
         <thead class="thead-dark">
         <tr>
             <th scope="col">#</th>
-            <th scope="col">Nom</th>
-            <th scope="col">editeur</th>
-            <th scope="col">console</th>
-            <th scope="col">Date de sortie</th>
+            <th scope="col"><spring:message code="jeu.creer.nom.value" /></th>
+            <th scope="col"><spring:message code="jeu.creer.fabricant.value" /></th>
+            <th scope="col"><spring:message code="jeu.list.console" /></th>
+            <th scope="col"><spring:message code="console.creer.date.value" /></th>
         </tr>
         </thead>
         <tbody>
