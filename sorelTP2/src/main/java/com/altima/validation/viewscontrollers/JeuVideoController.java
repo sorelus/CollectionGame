@@ -56,7 +56,7 @@ public class JeuVideoController {
             jeuVideoService.saveJeu(jeu);
         }catch (Exception ex){
             jeuSave =false;
-            App.APPLOGGER.log(Level.SEVERE,"Probleme avec l enregistrement : "+ ex.getMessage());
+            App.APPLOGGER.log(Level.SEVERE,"Probleme avec l'enregistrement : "+ ex.getMessage());
         }
         List<JeuVideoDto> jeux = jeuVideoService.getAllOrderByConsoleThenByDate();
         model.addAttribute("jeux", jeux);

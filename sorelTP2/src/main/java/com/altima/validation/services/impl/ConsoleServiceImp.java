@@ -25,7 +25,7 @@ public class ConsoleServiceImp implements ConsoleService {
      * @see com.altima.validation.services.ConsoleService#saveConsole(ConsoleDto)
      */
     @Override
-    public void saveConsole(ConsoleDto console) {
+    public void saveConsole(ConsoleDto console){
         consoleRepository.save(consoleMapper.toEntity(console));
     }
     /**
