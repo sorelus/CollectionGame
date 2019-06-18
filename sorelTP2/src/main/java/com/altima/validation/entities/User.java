@@ -2,7 +2,7 @@ package com.altima.validation.entities;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 /**
  * User class
@@ -25,9 +25,8 @@ public class User {
 
     private Date dateDeNaissance;
 
-    @OneToMany
-    @JoinColumn
-    List<JeuVideo> collection;
+    @ManyToMany(fetch = FetchType.EAGER)
+    Set<JeuVideo> collection;
 
     public Integer getId() {
         return id;
@@ -77,11 +76,11 @@ public class User {
         this.dateDeNaissance = dateDeNaissance;
     }
 
-    public List<JeuVideo> getCollection() {
+    public Set<JeuVideo> getCollection() {
         return collection;
     }
 
-    public void setCollection(List<JeuVideo> collection) {
+    public void setCollection(Set<JeuVideo> collection) {
         this.collection = collection;
     }
 }

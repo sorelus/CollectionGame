@@ -24,4 +24,7 @@ public interface JeuVideoRepository  extends JpaRepository<JeuVideo, Integer> {
      */
     @Query("select j from JeuVideo j where j.nom = ?1")
     JeuVideo getByName(String name);
+
+
+
 }

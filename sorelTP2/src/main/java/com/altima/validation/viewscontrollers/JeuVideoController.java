@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import javax.validation.Valid;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 
 @Controller
@@ -28,12 +30,18 @@ public class JeuVideoController {
 
     @GetMapping({"/create_jeu"})
     public String create(Model model, @RequestParam(value="jeu", required=false)String jeuName) {
-        List<JeuVideoDto> jeux = jeuVideoService.getAllOrderByConsoleThenByDate();
-        model.addAttribute("jeux", jeux);
         JeuVideoDto jeu = null;
-        if(jeuName!=null && jeuName.length()!=0){
-            jeu = jeuVideoService.getJeuByName(jeuName);
+        try{
+            List<JeuVideoDto> jeux = jeuVideoService.getAllOrderByConsoleThenByDate();
+            model.addAttribute("jeux", jeux);
+            if(jeuName!=null && jeuName.length()!=0){
+                jeu = jeuVideoService.getJeuByName(jeuName);
+            }
+        }catch (Exception ex){
+            App.APPLOGGER.log(Level.SEVERE,ex.getMessage());
         }
+
+
         if(jeu==null)
             jeu =new JeuVideoDto();
         model.addAttribute("editJeu",jeu);
@@ -42,45 +50,62 @@ public class JeuVideoController {
 
 
     @PostMapping({"/create_jeu"})
-    public String edit(@Valid @ModelAttribute("editJeu")JeuVideoDto jeu, Model model) {
+    public String edit( @ModelAttribute("editJeu")JeuVideoDto jeu, Model model) {
         ConsoleDto consoleDto =null;
-        // verification qnd get console information
-        if(jeu.getId()!=null) {
-            JeuVideoDto jeuTemp = jeuVideoService.getJeuById(jeu.getId());
-            if(jeuTemp!=null)
-                consoleDto = jeuTemp.getConsole();
-        }
         boolean jeuSave =true;
-        try{
-            jeu.setConsole(consoleDto);
-            jeuVideoService.saveJeu(jeu);
-        }catch (Exception ex){
+        Set<ConstraintViolation<JeuVideoDto>> constraintViolations = Validation.buildDefaultValidatorFactory().getValidator().validate(jeu);
+        if (!constraintViolations.isEmpty()){
             jeuSave =false;
-            App.APPLOGGER.log(Level.SEVERE,"Probleme avec l'enregistrement : "+ ex.getMessage());
+            App.APPLOGGER.log(Level.SEVERE, "echec de validation");
+        }else {
+            try {
+                // verification qnd get console information
+                if (jeu.getId() != null) {
+                    JeuVideoDto jeuTemp = jeuVideoService.getJeuById(jeu.getId());
+                    if (jeuTemp != null)
+                        consoleDto = jeuTemp.getConsole();
+                }
+                jeu.setConsole(consoleDto);
+                jeuVideoService.saveJeu(jeu);
+
+                List<JeuVideoDto> jeux = jeuVideoService.getAllOrderByConsoleThenByDate();
+                model.addAttribute("jeux", jeux);
+
+
+            } catch (Exception ex) {
+                App.APPLOGGER.log(Level.SEVERE, ex.getMessage());
+            }
         }
-        List<JeuVideoDto> jeux = jeuVideoService.getAllOrderByConsoleThenByDate();
-        model.addAttribute("jeux", jeux);
+        model.addAttribute("jeuSave", jeuSave);
         if(jeuSave)
             jeu = new JeuVideoDto();
-
         model.addAttribute("editJeu",jeu);
-        model.addAttribute("jeuSave",jeuSave);
         return "jeu/create_jeu";
     }
 
     @GetMapping({"/list_jeu"})
     public String list(Model model) {
-        List<JeuVideoDto> jeux = jeuVideoService.getAllOrderByConsoleThenByDate();
-        model.addAttribute("jeux", jeux);
+        try{
+            List<JeuVideoDto> jeux = jeuVideoService.getAllOrderByConsoleThenByDate();
+            model.addAttribute("jeux", jeux);
+        } catch (Exception ex){
+        App.APPLOGGER.log(Level.SEVERE,ex.getMessage());
+        }
+
         return "jeu/list_jeux";
     }
 
     @GetMapping({"/lier_jeu"})
     public String lier(Model model) {
-        List<JeuVideoDto> jeux = jeuVideoService.getAllOrderByConsoleThenByDate();
-        List<ConsoleDto> consoles = consoleService.getAllOrderByDate();
-        model.addAttribute("jeux", jeux);
-        model.addAttribute("consoles", consoles);
+        try{
+            List<JeuVideoDto> jeux = jeuVideoService.getAllOrderByConsoleThenByDate();
+            List<ConsoleDto> consoles = consoleService.getAllOrderByDate();
+            model.addAttribute("jeux", jeux);
+            model.addAttribute("consoles", consoles);
+        }catch (Exception ex){
+            App.APPLOGGER.log(Level.SEVERE,ex.getMessage());
+        }
+
         return "jeu/lier_console";
     }
     @PostMapping({"/lier_jeu"})
@@ -94,31 +119,34 @@ public class JeuVideoController {
                 jeuVideoService.saveJeu(jeu);
                 jeuSave =true;
             }
+            List<JeuVideoDto> jeux = jeuVideoService.getAllOrderByConsoleThenByDate();
+            List<ConsoleDto> consoles = consoleService.getAllOrderByDate();
+            model.addAttribute("jeux", jeux);
+            model.addAttribute("consoles", consoles);
+            model.addAttribute("jeuSave",jeuSave);
         }catch (Exception ex){
-            App.APPLOGGER.log(Level.SEVERE,"Probleme avec la liaison des jeux et des consoles : "+ ex.getMessage());
+            App.APPLOGGER.log(Level.SEVERE,ex.getMessage());
         }
-
-        List<JeuVideoDto> jeux = jeuVideoService.getAllOrderByConsoleThenByDate();
-        List<ConsoleDto> consoles = consoleService.getAllOrderByDate();
-        model.addAttribute("jeux", jeux);
-        model.addAttribute("consoles", consoles);
-        model.addAttribute("jeuSave",jeuSave);
         return "jeu/lier_console";
     }
 
     @GetMapping({"/find_jeu"})
     public String find(Model model,@RequestParam (value="jeu", required=false)String jeuName) {
-        JeuVideoDto jeuVideo = null;
-        boolean jeuSave =true;
-        if(jeuName!=null && jeuName.length()!=0){
-            jeuVideo = jeuVideoService.getJeuByName(jeuName);
-            if(jeuVideo==null){
-                jeuSave = false;
-            }
-            model.addAttribute("find",jeuSave);
-        }
-        model.addAttribute("select",jeuVideo);
 
-        return "jeu/search_jeu";
+        try{
+            JeuVideoDto jeuVideo = null;
+            boolean jeuSave =true;
+            if(jeuName!=null && jeuName.length()!=0){
+                jeuVideo = jeuVideoService.getJeuByName(jeuName);
+                if(jeuVideo==null){
+                    jeuSave = false;
+                }
+                model.addAttribute("find",jeuSave);
+            }
+            model.addAttribute("select",jeuVideo);
+        }catch (Exception ex){
+            App.APPLOGGER.log(Level.SEVERE,ex.getMessage());
+        }
+            return "jeu/search_jeu";
     }
 }

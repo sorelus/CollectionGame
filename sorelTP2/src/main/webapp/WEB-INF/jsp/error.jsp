@@ -4,7 +4,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Error</title>
+    <title><spring:message code="site.title"/></title>
     <link href="/css/bootstrap.css" rel="stylesheet"/>
     <link href="/css/main.css" rel="stylesheet"/>
     <link rel="icon" href="images/app-box.png">

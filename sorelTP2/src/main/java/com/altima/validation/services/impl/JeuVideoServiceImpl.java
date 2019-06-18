@@ -4,6 +4,7 @@ import com.altima.validation.dtos.entities.JeuVideoDto;
 import com.altima.validation.dtos.mappers.JeuVideoMapper;
 import com.altima.validation.repositories.JeuVideoRepository;
 import com.altima.validation.services.JeuVideoService;
+import com.altima.validation.utilis.JeuException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +27,7 @@ public class JeuVideoServiceImpl implements JeuVideoService {
      * @see com.altima.validation.services.JeuVideoService#saveJeu(JeuVideoDto)
      */
     @Override
-    public void saveJeu(JeuVideoDto jeu) {
+    public void saveJeu(JeuVideoDto jeu) throws JeuException {
         jeuVideoRepository.save(jeuVideoMapper.toEntity(jeu));
     }
 
@@ -34,7 +35,7 @@ public class JeuVideoServiceImpl implements JeuVideoService {
      * @see com.altima.validation.services.JeuVideoService#getAllOrderByConsoleThenByDate()
      */
     @Override
-    public List<JeuVideoDto> getAllOrderByConsoleThenByDate() {
+    public List<JeuVideoDto> getAllOrderByConsoleThenByDate() throws JeuException{
        return jeuVideoMapper.toDtos(jeuVideoRepository.getByConsoleAndDateDeSortie());
     }
 
@@ -42,7 +43,7 @@ public class JeuVideoServiceImpl implements JeuVideoService {
      * @see com.altima.validation.services.JeuVideoService#getJeuByName(String )
      */
     @Override
-    public JeuVideoDto getJeuByName(String name) {
+    public JeuVideoDto getJeuByName(String name) throws JeuException{
         return jeuVideoMapper.toDto(jeuVideoRepository.getByName(name));
     }
 
@@ -50,12 +51,12 @@ public class JeuVideoServiceImpl implements JeuVideoService {
      * @see com.altima.validation.services.JeuVideoService#saveAllJeux(List<JeuVideoDto> )
      */
     @Override
-    public void saveAllJeux(List<JeuVideoDto> jeux) {
+    public void saveAllJeux(List<JeuVideoDto> jeux)throws JeuException {
         jeuVideoRepository.saveAll(jeuVideoMapper.toEntities(jeux));
     }
 
     @Override
-    public JeuVideoDto getJeuById(int id) {
+    public JeuVideoDto getJeuById(int id) throws JeuException{
         return jeuVideoMapper.toDto(jeuVideoRepository.getOne(id));
     }
 }

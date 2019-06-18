@@ -1,13 +1,9 @@
 package com.altima.validation.dtos.entities;
-
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import java.util.Date;
-import java.util.List;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import java.util.*;
 
 /**
  * UserDto class
@@ -19,17 +15,32 @@ public class UserDto {
 
     private Integer id;
 
+    /*
+     Use to validate data from controller with @validate tag
+     */
+
+    @NotNull /* this property must not be null */
+    @NotEmpty /* this property must not be empty */
     private String nom;
+
     private String prenom;
 
+    @NotNull /* this property must not be null */
+    @NotEmpty /* this property must not be empty */
     private String login;
+
+
+    @NotNull /* this property must not be null */
+    @NotEmpty /* this property must not be empty */
     private String pass;
-    /* handles data-binding (parsing) and display for spring form tld o*/
+    /* handles data-binding (parsing) and display for spring */
+
+    @NotNull /* this property must not be null */
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date dateDeNaissance;
 
 
-    List<JeuVideoDto> collection;
+    Set<JeuVideoDto> collection;
 
     public Integer getId() {
         return id;
@@ -80,11 +91,40 @@ public class UserDto {
         this.dateDeNaissance = dateDeNaissance;
     }
 
-    public List<JeuVideoDto> getCollection() {
+    public Set<JeuVideoDto> getCollection() {
         return collection;
     }
 
-    public void setCollection(List<JeuVideoDto> collection) {
+    public void setCollection(Set<JeuVideoDto> collection) {
         this.collection = collection;
+    }
+
+    /* Use to qdd jeuVideo from collection*/
+    public void addToCollection(JeuVideoDto jeuVideoDto) {
+        if(collection==null)
+            collection= new HashSet<>();
+        collection.add(jeuVideoDto);
+
+    }
+
+    /* Use to delete jeuVideo from collection*/
+    public void deleteFromColection(int jeuId){
+        if(collection!=null){
+            collection.removeIf(x -> x.getId()==jeuId
+            );
+        }
+    }
+
+    @Override
+    public String toString() {
+        return "UserDto{" +
+                "id=" + id +
+                ", nom='" + nom + '\'' +
+                ", prenom='" + prenom + '\'' +
+                ", login='" + login + '\'' +
+                ", pass='" + pass + '\'' +
+                ", dateDeNaissance=" + dateDeNaissance +
+                ", collection=" + collection +
+                '}';
     }
 }

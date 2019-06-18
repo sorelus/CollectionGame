@@ -1,5 +1,8 @@
 package com.altima.validation.dtos.entities;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
@@ -11,11 +14,19 @@ public class JeuVideoDto {
 
     private Integer id;
 
+
+    /*
+     Use to validate data from controller with @validate tag
+     */
+    @NotNull /* this property must not be null */
+    @NotEmpty /* this property must not be empty */
     private String nom;
 
 
     private String editeur;
 
+
+    @NotNull /* this property must not be null */
     /* handles data-binding (parsing) and display for spring form tld o*/
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date dateDeSortie;
@@ -100,4 +111,5 @@ public class JeuVideoDto {
                 ", console=" + console +
                 '}';
     }
+
 }

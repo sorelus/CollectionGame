@@ -6,7 +6,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Console</title>
+    <title><spring:message code="site.title"/></title>
     <link href="/css/bootstrap.css" rel="stylesheet"/>
     <link href="/css/main.css" rel="stylesheet"/>
     <link rel="icon" href="images/app-box.png">
@@ -57,9 +57,9 @@
     <form:form method="POST"
                action="/create_console" modelAttribute="editConsole">
         <div class="form-group">
-            <label for="nom"> <spring:message code="console.creer.nom.value"/></label>
+            <label for="nom"> <spring:message code="console.creer.nom.value"/>*</label>
             <spring:message code="console.creer.nom.placeholder" var="placeholder" />
-            <form:input path="nom" class="form-control" id="nom"  placeholder='${placeholder}'/>
+            <form:input path="nom" class="form-control" id="nom"  placeholder='${placeholder}' required ="required"/>
         </div>
         <div class="form-group">
             <label for="fabricant"><spring:message code="console.creer.fabricant.value"/></label>
@@ -72,8 +72,8 @@
         </div>
 
         <div class="form-group">
-            <label for="dateDeSortie"><spring:message code="console.creer.date.value"/></label>
-            <form:input path="dateDeSortie" type="date"    class="form-control date" id="dateDeSortie"  name="dateDeSortie" />
+            <label for="dateDeSortie"><spring:message code="console.creer.date.value"/>*</label>
+            <form:input path="dateDeSortie" type="date"    class="form-control date" id="dateDeSortie"  name="dateDeSortie"  required ="required"/>
         </div>
         <form:input type="hidden"  name="id" path="id"/>
         <button type="submit" class="btn btn-secondary btn-block"><spring:message code="console.creer.button.enregistrer.value"/></button>

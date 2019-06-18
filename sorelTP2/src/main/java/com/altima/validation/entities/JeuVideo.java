@@ -13,8 +13,6 @@ public class JeuVideo {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
 
-
-
     @Column(unique = true)
     private String nom;
 
@@ -23,11 +21,8 @@ public class JeuVideo {
 
     private Date dateDeSortie;
 
-    @ManyToOne
-    @JoinColumn
+    @ManyToOne(fetch = FetchType.EAGER)
     private Console console;
-
-
 
     // constructor use by JPA/Hibernate to instance new console
     public JeuVideo() {

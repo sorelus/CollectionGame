@@ -3,6 +3,7 @@ package com.altima.validation.repositories;
 import com.altima.validation.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 
@@ -14,6 +15,11 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
 
+    /*
+   function to get user by login
+   */
+    @Query("select u from User u where u.login = ?1")
+    User getByLogin(String login);
 
 
 }

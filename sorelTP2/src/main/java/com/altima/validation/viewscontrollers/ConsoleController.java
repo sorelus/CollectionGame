@@ -4,13 +4,16 @@ package com.altima.validation.viewscontrollers;
 import com.altima.validation.App;
 import com.altima.validation.dtos.entities.ConsoleDto;
 import com.altima.validation.services.ConsoleService;
+import com.altima.validation.utilis.JeuException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 
 @Controller
@@ -21,29 +24,42 @@ public class ConsoleController {
     String modelAttribListConsole = "consoles";
     @GetMapping({"/create_console"})
     public String create(Model model,@RequestParam (value="console", required=false)String consoleName) {
-        List<ConsoleDto> consoles = consoleService.getAllOrderByDate();
-        model.addAttribute(modelAttribListConsole, consoles);
         ConsoleDto console = null;
-        if(consoleName!=null && consoleName.length()!=0){
-            console = consoleService.getConsoleByName(consoleName);
+        try {
+            List<ConsoleDto> consoles = consoleService.getAllOrderByDate();
+            model.addAttribute(modelAttribListConsole, consoles);
+
+            if (consoleName != null && consoleName.length() != 0) {
+                console = consoleService.getConsoleByName(consoleName);
+            }
+        }catch (JeuException ex){
+            App.APPLOGGER.log(Level.SEVERE,ex.getMessage());
         }
         if(console==null)
             console =new ConsoleDto();
         model.addAttribute("editConsole",console);
+
         return "console/create_console";
     }
 
     @PostMapping({"/create_console"})
-    public String edit(@Valid @ModelAttribute("editConsole")ConsoleDto console, Model model) {
+    public String edit( @ModelAttribute("editConsole")ConsoleDto console, Model model) {
         boolean consoleSave =true;
-        try{
-            consoleService.saveConsole(console);
-        }catch (Exception ex){
+        Set<ConstraintViolation<ConsoleDto>> constraintViolations = Validation.buildDefaultValidatorFactory().getValidator().validate(console);
+        if (!constraintViolations.isEmpty()){
             consoleSave =false;
-            App.APPLOGGER.log(Level.SEVERE,"Probleme avec l enregistrement : "+ ex.getMessage());
+            App.APPLOGGER.log(Level.SEVERE, "echec de validation");
+        }else {
+            try {
+                consoleService.saveConsole(console);
+
+                List<ConsoleDto> consoles = consoleService.getAllOrderByDate();
+                model.addAttribute(modelAttribListConsole, consoles);
+            } catch (JeuException ex) {
+                consoleSave = false;
+                App.APPLOGGER.log(Level.SEVERE, ex.getMessage());
+            }
         }
-        List<ConsoleDto> consoles = consoleService.getAllOrderByDate();
-        model.addAttribute(modelAttribListConsole, consoles);
         if(consoleSave)
             console = new ConsoleDto();
         model.addAttribute("editConsole",console);
@@ -53,8 +69,14 @@ public class ConsoleController {
 
     @GetMapping({"/list_console"})
     public String list(Model model) {
-        List<ConsoleDto> consoles = consoleService.getAllOrderByDate();
-        model.addAttribute(modelAttribListConsole, consoles);
+        try {
+            List<ConsoleDto> consoles = consoleService.getAllOrderByDate();
+            model.addAttribute(modelAttribListConsole, consoles);
+        }catch (Exception ex){
+            App.APPLOGGER.log(Level.SEVERE,ex.getMessage());
+        }
+
+
         return "console/list_consoles";
     }
 
@@ -63,7 +85,11 @@ public class ConsoleController {
         ConsoleDto console = null;
         boolean find = true;
         if(consoleName!=null && consoleName.length()!=0){
-            console = consoleService.getConsoleByName(consoleName);
+            try {
+                console = consoleService.getConsoleByName(consoleName);
+            }catch (Exception ex){
+                App.APPLOGGER.log(Level.SEVERE,ex.getMessage());
+            }
             if(console==null) {
                 find = false;
             }

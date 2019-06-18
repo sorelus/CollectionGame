@@ -6,7 +6,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>JeuVideo</title>
+    <title><spring:message code="site.title"/></title>
     <link href="/css/bootstrap.css" rel="stylesheet"/>
     <link href="/css/main.css" rel="stylesheet"/>
     <link rel="icon" href="images/app-box.png">
@@ -57,9 +57,9 @@
     <form:form method="POST"
                action="/create_jeu" modelAttribute="editJeu">
         <div class="form-group">
-            <label for="nom"> <spring:message code="jeu.creer.nom.value" /></label>
+            <label for="nom"> <spring:message code="jeu.creer.nom.value" />*</label>
             <spring:message code="jeu.creer.nom.placeholder" var="placeholder" />
-            <form:input path="nom" class="form-control" id="nom" placeholder='${placeholder}'/>
+            <form:input path="nom" class="form-control" id="nom" placeholder='${placeholder}' required ="required"/>
         </div>
         <div class="form-group">
             <label for="editeur"><spring:message code="jeu.creer.fabricant.value" /></label>
@@ -68,8 +68,8 @@
         </div>
 
         <div class="form-group">
-            <label for="dateDeSortie"><spring:message code="console.creer.date.value" /></label>
-            <form:input path="dateDeSortie" type="date"    class="form-control date" id="dateDeSortie" placeholder="Entrez la date de creation du jeu" name="dateDeSortie" />
+            <label for="dateDeSortie"><spring:message code="console.creer.date.value" />*</label>
+            <form:input path="dateDeSortie" type="date"    class="form-control date" id="dateDeSortie" placeholder="Entrez la date de creation du jeu" name="dateDeSortie" required ="required"/>
         </div>
         <form:input type="hidden"  name="id" path="id"/>
 

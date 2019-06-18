@@ -10,5 +10,4 @@ import org.mapstruct.Mapper;
 @Mapper
 public interface UserMapper extends EntityMapper<User, UserDto> {
 
-
 }
