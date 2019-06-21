@@ -6,17 +6,19 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+
 /**
  * ConsoleRepository interface
  * Repository for console (use by Hibernate to get,save, update console table)
+ *
  * @author sorelus Mkounga
  */
 @Repository
-public interface ConsoleRepository  extends JpaRepository<Console, Integer> {
+public interface ConsoleRepository extends JpaRepository<Console, Integer> {
 
-        /*
-        function to get all consoles order by  dateDeSortie
-        */
+    /*
+    function to get all consoles order by  dateDeSortie
+    */
     @Query("select c from Console c order by c.dateDeSortie")
     List<Console> getByDateDeSortie();
 

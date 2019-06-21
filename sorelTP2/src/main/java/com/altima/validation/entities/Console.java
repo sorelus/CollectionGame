@@ -1,17 +1,19 @@
 package com.altima.validation.entities;
+
 import javax.persistence.*;
 import java.util.Date;
 
 /**
  * Console class
+ *
  * @author sorelus Mkounga
  */
 
 @Entity // This tells Hibernate to make a table out of this class
-public class Console  {
+public class Console {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @Column(unique = true)
@@ -28,11 +30,12 @@ public class Console  {
     }
 
     /**
-     *  Console contructeur
-     * @param nom  console name
-     * @param fabricant console constructor
+     * Console contructeur
+     *
+     * @param nom          console name
+     * @param fabricant    console constructor
      * @param dateDeSortie create date
-     * @param bits console bit
+     * @param bits         console bit
      */
     public Console(String nom, String fabricant, Date dateDeSortie, int bits) {
         this.nom = nom;
@@ -53,7 +56,6 @@ public class Console  {
     public void setNom(String nom) {
         this.nom = nom;
     }
-
 
 
     public Date getDateDeSortie() {
@@ -90,8 +92,10 @@ public class Console  {
     /*
      * END define getters and setters
      */
+
     /**
-     *  redefine toString function
+     * redefine toString function
+     *
      * @return To return console info
      */
     @Override

@@ -4,7 +4,6 @@ import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,13 +17,18 @@ public class ErreurController implements ErrorController {
         if (status != null)
             statusCode = Integer.valueOf(status.toString());
 
-        model.addAttribute("code",statusCode);
+        model.addAttribute("code", statusCode);
 
-        return "/error";
+        return "error";
     }
- 
+
     @Override
     public String getErrorPath() {
         return "/error";
+    }
+
+    @RequestMapping("accessDenied")
+    public String accessDenied() {
+        return "accessDenied";
     }
 }

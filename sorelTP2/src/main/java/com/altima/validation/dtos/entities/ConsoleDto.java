@@ -3,7 +3,6 @@ package com.altima.validation.dtos.entities;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
@@ -40,11 +39,12 @@ public class ConsoleDto {
     }
 
     /**
-     *  ConsoleDto contructeur
-     * @param nom  console name
-     * @param fabricant console constructor
+     * ConsoleDto contructeur
+     *
+     * @param nom          console name
+     * @param fabricant    console constructor
      * @param dateDeSortie create date
-     * @param bits console bit
+     * @param bits         console bit
      */
     public ConsoleDto(String nom, String fabricant, Date dateDeSortie, int bits) {
         this.nom = nom;
@@ -100,8 +100,10 @@ public class ConsoleDto {
     /*
      * END define getters and setters
      */
+
     /**
-     *  redefine toString function
+     * redefine toString function
+     *
      * @return To return consoleDto info
      */
     @Override

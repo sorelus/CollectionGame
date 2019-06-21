@@ -10,22 +10,18 @@
     <link rel="icon" href="images/app-box.png">
 </head>
 <body class="body">
-<%@ include file="part/menu.jsp" %>
-<center>
-    <div class="col-sm-6">
+    <div class="col-sm-6 centerAlpha">
 
         <br><br>
         <div class="alert alert-danger ">
             <br>
-            <h1><p class="bienvenue write"><spring:message code="error.lier.message"/></p></h1>
-            <h5><spring:message code="error.lier.indication"/> ${code}</strong> </h5>
+            <h4><p class="bienvenue write"><spring:message code="access.lier.message"/></p></h4>
             <br><br>
             <a type="submit" class="btn btn-primary btn-block" href="/"><spring:message code="error.lier.button"/></a>
         </div>
 
     </div>
 
-</center>
 
 </body>
 <script src="/js/main.js"></script>

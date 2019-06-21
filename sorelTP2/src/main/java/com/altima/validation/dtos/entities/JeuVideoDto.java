@@ -1,4 +1,5 @@
 package com.altima.validation.dtos.entities;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotEmpty;
@@ -7,6 +8,7 @@ import java.util.Date;
 
 /**
  * JeuVideoDto class use like a mapper version of jeuvideo entity
+ *
  * @author sorelus Mkounga
  */
 
@@ -39,10 +41,11 @@ public class JeuVideoDto {
 
     /**
      * JeuVideoDto constructor
-     * @param nom jeuVideo name
-     * @param editeur jeuVideo editor
+     *
+     * @param nom          jeuVideo name
+     * @param editeur      jeuVideo editor
      * @param dateDeSortie create date
-     * @param console console platform for play
+     * @param console      console platform for play
      */
     public JeuVideoDto(String nom, String editeur, Date dateDeSortie, ConsoleDto console) {
         this.nom = nom;
@@ -51,6 +54,7 @@ public class JeuVideoDto {
         this.dateDeSortie = dateDeSortie;
         this.console = console;
     }
+
     /*
      * begin define Getters and setters
      *
@@ -99,7 +103,8 @@ public class JeuVideoDto {
      */
 
     /**
-     *  redefine toString function
+     * redefine toString function
+     *
      * @return To return jeuVideoDto info
      */
     @Override

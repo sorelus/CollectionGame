@@ -30,5 +30,14 @@ Compilation et execution du projet
 	* mvn clean package
 
 * Executer
-	* java -jar target/sorel.tp2-0.0.3.war
+	* java -jar target/sorel.tp2-0.0.5.war
 	* Ouvrez le navigateur et entrez http://localhost:8080
+	
+Comment ça fonctionne
+-----------------
+* Ouvrir la page : http://localhost:8080
+* Cliquez sur <b><i>creer un compte</i></b>
+* Creez vos comptes (il existe 2 types de compte : admin et simple)
+    * Le compte <b>admin</b> vous donne la possibilité de creer des consoles, des jeux. ces entités pourrons etre utilisées par les utilisateurs simples ( compte simple), creer et editer des utilisateurs.
+    * Le compte <b> simple</b> est le compte basique , avec ce compte , on peut creer et manager (ajouter / supprimer) sa collection de jeux ( jeux prealablement crées par un admin) .
+    

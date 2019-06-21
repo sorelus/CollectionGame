@@ -15,50 +15,50 @@
 <%@ include file="../part/menu.jsp" %>
 <div class="col-sm-12">
     <div class="alert alert-secondary ">
-        <strong><spring:message code="jeu.search.title" /></strong>.
+        <strong><spring:message code="jeu.search.title"/></strong>.
     </div>
 
     <form method="GET"
-          action="/find_jeu" >
-        <label for="search"><spring:message code="jeu.search.nom" /></label>
+          action="/find_jeu">
+        <label for="search"><spring:message code="jeu.search.nom"/></label>
         <div class="input-group mb-2 mr-sm-2">
-            <input type="text" class="form-control" id="search"  name="jeu" placeholder=""/>
-            <button type="submit" class="btn btn-secondary"><spring:message code="jeu.search.button.value" /></button>
+            <input type="text" class="form-control" id="search" name="jeu" placeholder=""/>
+            <button type="submit" class="btn btn-secondary"><spring:message code="jeu.search.button.value"/></button>
         </div>
         <small id="searchHelpBlock" class="form-text text-muted">
-            <spring:message code="jeu.search.info.value" />
+            <spring:message code="jeu.search.info.value"/>
         </small>
     </form>
     <hr class="barre"/>
 
     <%--show if we created / edited console--%>
     <c:if test="${not empty find && not find }">
-            <c:set var = "alertType"
-                   value = "alert-danger"
-                   scope="page" />
+        <c:set var="alertType"
+               value="alert-danger"
+               scope="page"/>
         <spring:message code="jeu.search.error.value" var="alertMessage" scope="page"/>
 
         <div class="alert ${alertType}">
                 ${alertMessage}
         </div>
     </c:if>
-        <div class="form-group">
-            <label for="nom"><spring:message code="jeu.creer.nom.value" /></label>
-            <label id="nom" class="form-control" >${select.nom}</label>
-        </div>
-        <div class="form-group">
-            <label for="fabricant"><spring:message code="jeu.creer.fabricant.value" /></label>
-            <label id="fabricant" class="form-control">${select.editeur}</label>
-        </div>
-        <div class="form-group">
-            <label for="bits"><spring:message code="jeu.list.console" /></label>
-            <label id="bits" class="form-control">${select.console.nom}</label>
-        </div>
+    <div class="form-group">
+        <label for="nom"><spring:message code="jeu.creer.nom.value"/></label>
+        <label id="nom" class="form-control">${select.nom}</label>
+    </div>
+    <div class="form-group">
+        <label for="fabricant"><spring:message code="jeu.creer.fabricant.value"/></label>
+        <label id="fabricant" class="form-control">${select.editeur}</label>
+    </div>
+    <div class="form-group">
+        <label for="bits"><spring:message code="jeu.list.console"/></label>
+        <label id="bits" class="form-control">${select.console.nom}</label>
+    </div>
 
-        <div class="form-group">
-            <label for="dateDeSortie"><spring:message code="console.creer.date.value" /></label>
-            <label id="dateDeSortie" class="form-control">${select.dateDeSortie}</label>
-       </div>
+    <div class="form-group">
+        <label for="dateDeSortie"><spring:message code="console.creer.date.value"/></label>
+        <label id="dateDeSortie" class="form-control">${select.dateDeSortie}</label>
+    </div>
 
 </div>
 

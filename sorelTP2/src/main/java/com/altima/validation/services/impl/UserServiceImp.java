@@ -13,6 +13,7 @@ import java.util.List;
 
 /**
  * UserServiceImp class
+ *
  * @author sorelus Mkounga
  */
 @Service
@@ -25,46 +26,51 @@ public class UserServiceImp implements UserService {
     UserRepository userRepository;
 
     /**
-     * @see com.altima.validation.services.UserService#saveUser(UserDto )
+     * @see com.altima.validation.services.UserService#saveUser(UserDto)
      */
     @Override
     public void saveUser(UserDto user) throws JeuException {
         try {
             User userEnity = userMapper.toEntity(user);
             userRepository.save(userEnity);
-        }catch (Exception ex) {
+        } catch (Exception ex) {
             throw new JeuException(ex.getMessage());
         }
     }
 
     /**
-     * @see com.altima.validation.services.UserService#getAllUsers( )
+     * @see com.altima.validation.services.UserService#getAllUsers()
      */
     @Override
     public List<UserDto> getAllUsers() throws JeuException {
-        List<UserDto>   userEnities =null;
+        List<UserDto> userEnities = null;
         try {
             userEnities = userMapper.toDtos(userRepository.findAll());
 
-        }catch (Exception ex) {
+        } catch (Exception ex) {
             throw new JeuException(ex.getMessage());
         }
         return userEnities;
     }
 
     /**
-     * @see com.altima.validation.services.UserService#getByLogin(String )
+     * @see com.altima.validation.services.UserService#getByLogin(String)
      */
     @Override
     public UserDto getByLogin(String login) throws JeuException {
-        UserDto user =null;
+        UserDto user = null;
         try {
             user = userMapper.toDto(userRepository.getByLogin(login));
 
-        }catch (Exception ex) {
+        } catch (Exception ex) {
             throw new JeuException(ex.getMessage());
         }
         return user;
+    }
+
+    @Override
+    public UserDto getById(int id) throws JeuException {
+        return userMapper.toDto(userRepository.getOne(id));
     }
 
 }

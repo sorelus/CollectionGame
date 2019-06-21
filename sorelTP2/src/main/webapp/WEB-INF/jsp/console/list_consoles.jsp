@@ -17,7 +17,7 @@
         <strong><spring:message code="console.list.title"/></strong>
     </div>
 
-    <table class="table table-bordered" >
+    <table class="table table-bordered">
         <thead class="thead-dark">
         <tr>
             <th scope="col">#</th>

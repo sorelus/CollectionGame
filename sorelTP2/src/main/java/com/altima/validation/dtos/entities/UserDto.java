@@ -1,46 +1,42 @@
 package com.altima.validation.dtos.entities;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.util.*;
+import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * UserDto class
+ *
  * @author sorelus Mkounga
  */
 
 public class UserDto {
 
 
+    Set<JeuVideoDto> collection;
     private Integer id;
-
+    private Set<String> roles;
     /*
      Use to validate data from controller with @validate tag
      */
-
     @NotNull /* this property must not be null */
     @NotEmpty /* this property must not be empty */
     private String nom;
-
     private String prenom;
-
     @NotNull /* this property must not be null */
     @NotEmpty /* this property must not be empty */
     private String login;
-
-
+    /* handles data-binding (parsing) and display for spring */
     @NotNull /* this property must not be null */
     @NotEmpty /* this property must not be empty */
     private String pass;
-    /* handles data-binding (parsing) and display for spring */
-
     @NotNull /* this property must not be null */
     @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date dateDeNaissance;
-
-
-    Set<JeuVideoDto> collection;
 
     public Integer getId() {
         return id;
@@ -101,16 +97,16 @@ public class UserDto {
 
     /* Use to qdd jeuVideo from collection*/
     public void addToCollection(JeuVideoDto jeuVideoDto) {
-        if(collection==null)
-            collection= new HashSet<>();
+        if (collection == null)
+            collection = new HashSet<>();
         collection.add(jeuVideoDto);
 
     }
 
     /* Use to delete jeuVideo from collection*/
-    public void deleteFromColection(int jeuId){
-        if(collection!=null){
-            collection.removeIf(x -> x.getId()==jeuId
+    public void deleteFromColection(int jeuId) {
+        if (collection != null) {
+            collection.removeIf(x -> x.getId() == jeuId
             );
         }
     }
@@ -126,5 +122,19 @@ public class UserDto {
                 ", dateDeNaissance=" + dateDeNaissance +
                 ", collection=" + collection +
                 '}';
+    }
+
+    public Set<String> getRoles() {
+        return roles;
+    }
+
+    public void addRole(String role){
+       if(roles==null)
+           roles = new HashSet<>();
+        roles.add(role);
+    }
+
+    public void setRoles(Set<String> roles) {
+        this.roles = roles;
     }
 }

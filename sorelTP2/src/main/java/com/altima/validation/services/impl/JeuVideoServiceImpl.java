@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 /**
  * JeuVideoServiceImpl class
+ *
  * @author sorelus Mkounga
  */
 @Service
@@ -28,35 +30,55 @@ public class JeuVideoServiceImpl implements JeuVideoService {
      */
     @Override
     public void saveJeu(JeuVideoDto jeu) throws JeuException {
-        jeuVideoRepository.save(jeuVideoMapper.toEntity(jeu));
+        try {
+            jeuVideoRepository.save(jeuVideoMapper.toEntity(jeu));
+        } catch (Exception ex) {
+            throw new JeuException(ex.getMessage());
+        }
     }
 
     /**
      * @see com.altima.validation.services.JeuVideoService#getAllOrderByConsoleThenByDate()
      */
     @Override
-    public List<JeuVideoDto> getAllOrderByConsoleThenByDate() throws JeuException{
-       return jeuVideoMapper.toDtos(jeuVideoRepository.getByConsoleAndDateDeSortie());
+    public List<JeuVideoDto> getAllOrderByConsoleThenByDate() throws JeuException {
+        try {
+            return jeuVideoMapper.toDtos(jeuVideoRepository.getByConsoleAndDateDeSortie());
+        } catch (Exception ex) {
+            throw new JeuException(ex.getMessage());
+        }
     }
 
     /**
-     * @see com.altima.validation.services.JeuVideoService#getJeuByName(String )
+     * @see com.altima.validation.services.JeuVideoService#getJeuByName(String)
      */
     @Override
-    public JeuVideoDto getJeuByName(String name) throws JeuException{
-        return jeuVideoMapper.toDto(jeuVideoRepository.getByName(name));
+    public JeuVideoDto getJeuByName(String name) throws JeuException {
+        try {
+            return jeuVideoMapper.toDto(jeuVideoRepository.getByName(name));
+        } catch (Exception ex) {
+            throw new JeuException(ex.getMessage());
+        }
     }
 
     /**
      * @see com.altima.validation.services.JeuVideoService#saveAllJeux(List<JeuVideoDto> )
      */
     @Override
-    public void saveAllJeux(List<JeuVideoDto> jeux)throws JeuException {
-        jeuVideoRepository.saveAll(jeuVideoMapper.toEntities(jeux));
+    public void saveAllJeux(List<JeuVideoDto> jeux) throws JeuException {
+        try {
+            jeuVideoRepository.saveAll(jeuVideoMapper.toEntities(jeux));
+        } catch (Exception ex) {
+            throw new JeuException(ex.getMessage());
+        }
     }
 
     @Override
-    public JeuVideoDto getJeuById(int id) throws JeuException{
-        return jeuVideoMapper.toDto(jeuVideoRepository.getOne(id));
+    public JeuVideoDto getJeuById(int id) throws JeuException {
+        try {
+            return jeuVideoMapper.toDto(jeuVideoRepository.getOne(id));
+        } catch (Exception ex) {
+            throw new JeuException(ex.getMessage());
+        }
     }
 }

@@ -6,6 +6,7 @@ import org.mapstruct.Mapper;
 
 /**
  * ConsoleMapper interface  it is mapper logical for Console <-> consoleDto ( using mapstruct library)
+ *
  * @author sorelus Mkounga
  */
 @Mapper

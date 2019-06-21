@@ -15,37 +15,38 @@
 <%@ include file="../part/menu.jsp" %>
 <div class="col-sm-12">
     <div class="alert alert-secondary ">
-        <strong><spring:message code="console.creer.title" /></strong>.
+        <strong><spring:message code="console.creer.title"/></strong>.
     </div>
 
     <form method="GET"
-          action="/create_console" >
-        <label for="search"><spring:message code="console.creer.enregistrerconsole" /></label>
+          action="/create_console">
+        <label for="search"><spring:message code="console.creer.enregistrerconsole"/></label>
         <div class="input-group mb-2 mr-sm-2">
             <select name="console" class="custom-select " id="search">
-                <option selected><spring:message code="console.creer.creerconsole" /></option>
+                <option selected><spring:message code="console.creer.creerconsole"/></option>
                 <c:forEach items="${consoles}" var="console">
                     <option value="${console.nom}" ${console.id == editConsole.id ? 'selected' : ''}>${console.nom}</option>
                 </c:forEach>
             </select>
-            <button type="submit" class="btn btn-secondary"><spring:message code="console.creer.boutoncharger" /></button>
+            <button type="submit" class="btn btn-secondary"><spring:message
+                    code="console.creer.boutoncharger"/></button>
         </div>
         <small id="searchHelpBlock" class="form-text text-muted">
-            <spring:message code="console.creer.indication" />
+            <spring:message code="console.creer.indication"/>
         </small>
     </form>
     <hr class="barre"/>
 
     <%--show if we created / edited console--%>
     <c:if test="${not empty consoleSave}">
-        <c:set var = "alertType"
-               value = "alert-success"
-               scope="page" />
+        <c:set var="alertType"
+               value="alert-success"
+               scope="page"/>
         <spring:message code="console.creer.correct" var="alertMessage"/>
         <c:if test="${!consoleSave}">
-            <c:set var = "alertType"
-                   value = "alert-danger"
-                   scope="page" />
+            <c:set var="alertType"
+                   value="alert-danger"
+                   scope="page"/>
             <spring:message code="console.creer.error" var="alertMessage"/>
         </c:if>
 
@@ -58,27 +59,31 @@
                action="/create_console" modelAttribute="editConsole">
         <div class="form-group">
             <label for="nom"> <spring:message code="console.creer.nom.value"/>*</label>
-            <spring:message code="console.creer.nom.placeholder" var="placeholder" />
-            <form:input path="nom" class="form-control" id="nom"  placeholder='${placeholder}' required ="required"/>
+            <spring:message code="console.creer.nom.placeholder" var="placeholder"/>
+            <form:input path="nom" class="form-control" id="nom" placeholder='${placeholder}' required="required"/>
         </div>
         <div class="form-group">
             <label for="fabricant"><spring:message code="console.creer.fabricant.value"/></label>
-            <spring:message code="console.creer.fabricant.placeholder" var="placeholder" />
-            <form:input path="fabricant" class="form-control" id="fabricant" placeholder='${placeholder}' name="fabricant" />
+            <spring:message code="console.creer.fabricant.placeholder" var="placeholder"/>
+            <form:input path="fabricant" class="form-control" id="fabricant" placeholder='${placeholder}'
+                        name="fabricant"/>
         </div>
         <div class="form-group">
             <label for="bits"><spring:message code="console.creer.bits.value"/></label>
-            <form:input path="bits" type="number" class="form-control" id="bits"  name="bits" />
+            <form:input path="bits" type="number" class="form-control" id="bits" name="bits"/>
         </div>
 
         <div class="form-group">
             <label for="dateDeSortie"><spring:message code="console.creer.date.value"/>*</label>
-            <form:input path="dateDeSortie" type="date"    class="form-control date" id="dateDeSortie"  name="dateDeSortie"  required ="required"/>
+            <form:input path="dateDeSortie" type="date" class="form-control date" id="dateDeSortie" name="dateDeSortie"
+                        required="required"/>
         </div>
-        <form:input type="hidden"  name="id" path="id"/>
-        <button type="submit" class="btn btn-secondary btn-block"><spring:message code="console.creer.button.enregistrer.value"/></button>
+        <form:input type="hidden" name="id" path="id"/>
+        <button type="submit" class="btn btn-secondary btn-block"><spring:message
+                code="console.creer.button.enregistrer.value"/></button>
 
         <br/><br/>
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
     </form:form>
 
 </div>

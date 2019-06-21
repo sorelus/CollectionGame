@@ -6,6 +6,7 @@ import org.mapstruct.Mapper;
 
 /**
  * JeuVideoMapper interface  it is mapper logical for JeuVideo <-> JeuVideoDto ( using mapstruct library)
+ *
  * @author sorelus Mkounga
  */
 @Mapper

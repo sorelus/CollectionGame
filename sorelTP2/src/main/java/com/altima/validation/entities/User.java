@@ -6,27 +6,25 @@ import java.util.Set;
 
 /**
  * User class
+ *
  * @author sorelus Mkounga
  */
 @Entity // This tells Hibernate to make a table out of this class
 public class User {
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
-    private Integer id;
-
-    private String nom;
-
-    private String prenom;
-
-    @Column(unique = true)
-    private String login;
-
-    private String pass;
-
-    private Date dateDeNaissance;
-
     @ManyToMany(fetch = FetchType.EAGER)
     Set<JeuVideo> collection;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Integer id;
+    private String nom;
+    private String prenom;
+    @Column(unique = true)
+    private String login;
+    private String pass;
+    private Date dateDeNaissance;
+
+    @ElementCollection(targetClass=String.class) // use to help hibernate to determinate Type of set
+    private Set<String> roles;
 
     public Integer getId() {
         return id;
@@ -82,5 +80,13 @@ public class User {
 
     public void setCollection(Set<JeuVideo> collection) {
         this.collection = collection;
+    }
+
+    public Set<String> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<String> roles) {
+        this.roles = roles;
     }
 }

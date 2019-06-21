@@ -9,8 +9,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 /**
  * ConsoleServiceImp class
+ *
  * @author sorelus Mkounga
  */
 @Service
@@ -27,41 +29,57 @@ public class ConsoleServiceImp implements ConsoleService {
      */
     @Override
     public void saveConsole(ConsoleDto console) throws JeuException {
-
-        consoleRepository.save(consoleMapper.toEntity(console));
+        try {
+            consoleRepository.save(consoleMapper.toEntity(console));
+        } catch (Exception ex) {
+            throw new JeuException(ex.getMessage());
+        }
     }
+
     /**
      * @see com.altima.validation.services.ConsoleService#getAllOrderByDate()
      */
     @Override
-    public List<ConsoleDto> getAllOrderByDate() throws JeuException{
-
-        return consoleMapper.toDtos(consoleRepository.getByDateDeSortie());
+    public List<ConsoleDto> getAllOrderByDate() throws JeuException {
+        try {
+            return consoleMapper.toDtos(consoleRepository.getByDateDeSortie());
+        } catch (Exception ex) {
+            throw new JeuException(ex.getMessage());
+        }
     }
+
     /**
-     * @see com.altima.validation.services.ConsoleService#getConsoleByName(String )
+     * @see com.altima.validation.services.ConsoleService#getConsoleByName(String)
      */
     @Override
-    public ConsoleDto getConsoleByName(String name) throws JeuException{
-
-        return consoleMapper.toDto(consoleRepository.getByName(name));
+    public ConsoleDto getConsoleByName(String name) throws JeuException {
+        try {
+            return consoleMapper.toDto(consoleRepository.getByName(name));
+        } catch (Exception ex) {
+            throw new JeuException(ex.getMessage());
+        }
     }
 
     @Override
-    public ConsoleDto getConsoleId(int id) throws JeuException{
-
-        return consoleMapper.toDto(consoleRepository.getOne(id));
+    public ConsoleDto getConsoleId(int id) throws JeuException {
+        try {
+            return consoleMapper.toDto(consoleRepository.getOne(id));
+        } catch (Exception ex) {
+            throw new JeuException(ex.getMessage());
+        }
     }
 
     /**
      * @see com.altima.validation.services.ConsoleService#saveAllConsoles(List<ConsoleDto> )
      */
     @Override
-    public void saveAllConsoles(List<ConsoleDto> consoles)  throws JeuException{
-
-       consoleRepository.saveAll(
-               consoleMapper.toEntities(consoles));
-
+    public void saveAllConsoles(List<ConsoleDto> consoles) throws JeuException {
+        try {
+            consoleRepository.saveAll(
+                    consoleMapper.toEntities(consoles));
+        } catch (Exception ex) {
+            throw new JeuException(ex.getMessage());
+        }
 
     }
 }

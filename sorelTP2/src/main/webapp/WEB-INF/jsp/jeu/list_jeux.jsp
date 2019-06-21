@@ -14,17 +14,17 @@
 <%@ include file="../part/menu.jsp" %>
 <div class="col-sm-12">
     <div class="alert alert-secondary ">
-        <strong><spring:message code="jeu.list.title" /></strong>.
+        <strong><spring:message code="jeu.list.title"/></strong>.
     </div>
 
-    <table class="table table-bordered" >
+    <table class="table table-bordered">
         <thead class="thead-dark">
         <tr>
             <th scope="col">#</th>
-            <th scope="col"><spring:message code="jeu.creer.nom.value" /></th>
-            <th scope="col"><spring:message code="jeu.creer.fabricant.value" /></th>
-            <th scope="col"><spring:message code="jeu.list.console" /></th>
-            <th scope="col"><spring:message code="console.creer.date.value" /></th>
+            <th scope="col"><spring:message code="jeu.creer.nom.value"/></th>
+            <th scope="col"><spring:message code="jeu.creer.fabricant.value"/></th>
+            <th scope="col"><spring:message code="jeu.list.console"/></th>
+            <th scope="col"><spring:message code="console.creer.date.value"/></th>
         </tr>
         </thead>
         <tbody>

@@ -1,8 +1,11 @@
 package com.altima.validation.entities;
+
 import javax.persistence.*;
 import java.util.Date;
+
 /**
  * JeuVideo class
+ *
  * @author sorelus Mkounga
  */
 @Entity // This tells Hibernate to make a table out of this class
@@ -10,7 +13,7 @@ public class JeuVideo {
 
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
 
     @Column(unique = true)
@@ -30,10 +33,11 @@ public class JeuVideo {
 
     /**
      * JeuVideo constructor
-     * @param nom jeuVideo name
-     * @param editeur jeuVideo editor
+     *
+     * @param nom          jeuVideo name
+     * @param editeur      jeuVideo editor
      * @param dateDeSortie create date
-     * @param console console platform for play
+     * @param console      console platform for play
      */
     public JeuVideo(String nom, String editeur, Date dateDeSortie, Console console) {
         this.nom = nom;
@@ -42,6 +46,7 @@ public class JeuVideo {
         this.dateDeSortie = dateDeSortie;
         this.console = console;
     }
+
     /*
      * begin define Getters and setters
      *
@@ -90,7 +95,8 @@ public class JeuVideo {
      */
 
     /**
-     *  redefine toString function
+     * redefine toString function
+     *
      * @return To return jeuVideo info
      */
     @Override

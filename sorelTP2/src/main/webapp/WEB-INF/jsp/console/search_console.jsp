@@ -19,11 +19,12 @@
     </div>
 
     <form method="GET"
-          action="/find_console" >
+          action="/find_console">
         <label for="search"><spring:message code="console.search.nom"/></label>
         <div class="input-group mb-2 mr-sm-2">
-            <input type="text" class="form-control" id="search"  name="console" placeholder=""/>
-            <button type="submit" class="btn btn-secondary"><spring:message code="console.search.button.value"/></button>
+            <input type="text" class="form-control" id="search" name="console" placeholder=""/>
+            <button type="submit" class="btn btn-secondary"><spring:message
+                    code="console.search.button.value"/></button>
         </div>
         <small id="searchHelpBlock" class="form-text text-muted">
             <spring:message code="console.search.info.value"/>
@@ -33,9 +34,9 @@
 
     <%--show if we created / edited console--%>
     <c:if test="${not empty find && not find }">
-            <c:set var = "alertType"
-                   value = "alert-danger"
-                   scope="page" />
+        <c:set var="alertType"
+               value="alert-danger"
+               scope="page"/>
 
         <spring:message code="console.search.error.value" var="alertMessage" scope="page"/>
 
@@ -43,24 +44,24 @@
                 ${alertMessage}
         </div>
     </c:if>
-        <div class="form-group">
-            <label for="nom"><spring:message code="console.creer.nom.value"/></label>
-            <label id="nom" class="form-control" >${select.nom}</label>
+    <div class="form-group">
+        <label for="nom"><spring:message code="console.creer.nom.value"/></label>
+        <label id="nom" class="form-control">${select.nom}</label>
 
-        </div>
-        <div class="form-group">
-            <label for="fabricant"><spring:message code="console.creer.fabricant.value"/></label>
-            <label id="fabricant" class="form-control">${select.fabricant}</label>
-        </div>
-        <div class="form-group">
-            <label for="bits"><spring:message code="console.creer.bits.value"/></label>
-            <label id="bits" class="form-control">${select.bits}</label>
-        </div>
+    </div>
+    <div class="form-group">
+        <label for="fabricant"><spring:message code="console.creer.fabricant.value"/></label>
+        <label id="fabricant" class="form-control">${select.fabricant}</label>
+    </div>
+    <div class="form-group">
+        <label for="bits"><spring:message code="console.creer.bits.value"/></label>
+        <label id="bits" class="form-control">${select.bits}</label>
+    </div>
 
-        <div class="form-group">
-            <label for="dateDeSortie"><spring:message code="console.creer.date.value"/></label>
-            <label id="dateDeSortie" class="form-control">${select.dateDeSortie}</label>
-       </div>
+    <div class="form-group">
+        <label for="dateDeSortie"><spring:message code="console.creer.date.value"/></label>
+        <label id="dateDeSortie" class="form-control">${select.dateDeSortie}</label>
+    </div>
 
 </div>
 

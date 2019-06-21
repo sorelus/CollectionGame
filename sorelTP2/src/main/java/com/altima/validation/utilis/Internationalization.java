@@ -16,34 +16,35 @@ import java.util.Locale;
 @Configuration
 public class Internationalization implements WebMvcConfigurer {
 
-  /**
-   * @return french by default
-   */
-  @Bean
-  public LocaleResolver localeResolver() {
-    SessionLocaleResolver resolver = new SessionLocaleResolver();
-    resolver.setDefaultLocale(Locale.FRANCE);
-    return resolver;
-  }
+    /**
+     * @return french by default
+     */
+    @Bean
+    public LocaleResolver localeResolver() {
+        SessionLocaleResolver resolver = new SessionLocaleResolver();
+        resolver.setDefaultLocale(Locale.FRANCE);
+        return resolver;
+    }
 
-  /*
-   * get language we want to use
-   */
-  @Bean
-  public LocaleChangeInterceptor localeChangeInterceptor() {
-    LocaleChangeInterceptor local = new LocaleChangeInterceptor();
-    local.setParamName("lang");
-    return local;
-  }
+    /*
+     * get language we want to use
+     */
+    @Bean
+    public LocaleChangeInterceptor localeChangeInterceptor() {
+        LocaleChangeInterceptor local = new LocaleChangeInterceptor();
+        local.setParamName("lang");
+        return local;
+    }
 
-  /**
-   * We will intercept request to set which language we can use
-   * @param registry
-   */
-  @Override
-  public void addInterceptors(InterceptorRegistry registry) {
-    registry.addInterceptor(localeChangeInterceptor());
-  }
+    /**
+     * We will intercept request to set which language we can use
+     *
+     * @param registry
+     */
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(localeChangeInterceptor());
+    }
 
 
 }
