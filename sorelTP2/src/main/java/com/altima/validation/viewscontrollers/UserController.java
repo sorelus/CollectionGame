@@ -81,7 +81,7 @@ public class UserController {
 
     @PreAuthorize("hasAuthority('admin')")
     @PostMapping({UrlsControllers.LINK_USER_URL})
-    public ModelAndView listJeuxPost(RedirectAttributes attributes, @RequestParam(value = "jeu") int jeu, @RequestParam(value = "login") String login) {
+    public RedirectView listJeuxPost(RedirectAttributes attributes, @RequestParam(value = "jeu") int jeu, @RequestParam(value = "login") String login) {
         return showListJeuxPost(attributes, jeu, login, "/list_jeux_user");
     }
 
@@ -136,7 +136,7 @@ public class UserController {
 
     @PreAuthorize("hasAuthority('simple')")
     @PostMapping({UrlsControllers.SIMPLE_LIST_GAME_URL})
-    public ModelAndView mesJeuxPost(Principal principal, RedirectAttributes attributes, @RequestParam(value = "jeu") int jeu) {
+    public RedirectView mesJeuxPost(Principal principal, RedirectAttributes attributes, @RequestParam(value = "jeu") int jeu) {
         String login = principal.getName();
         return showListJeuxPost(attributes, jeu, login, UrlsControllers.SIMPLE_LIST_GAME_URL);
     }
@@ -218,7 +218,7 @@ public class UserController {
         return "user/list_jeux_user";
     }
 
-    public ModelAndView showListJeuxPost(RedirectAttributes attributes, int jeu, String login, String action) {
+    public RedirectView showListJeuxPost(RedirectAttributes attributes, int jeu, String login, String action) {
         JeuVideoDto jeuVideoDto = null;
         UserDto userDto = new UserDto();
         try {
@@ -235,7 +235,7 @@ public class UserController {
             App.APPLOGGER.log(Level.SEVERE, ex.getMessage());
         }
         attributes.addAttribute("login", login);
-        return new ModelAndView("redirect:" + action);
+        return  new RedirectView(action);
     }
 
 
