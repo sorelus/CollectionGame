@@ -36,6 +36,8 @@ public class ConsoleDto {
     private int bits;
 
     public ConsoleDto() {
+        this.nom = "";
+        dateDeSortie = new Date();
     }
 
     /**

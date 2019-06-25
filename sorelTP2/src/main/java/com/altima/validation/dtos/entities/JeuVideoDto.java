@@ -35,8 +35,12 @@ public class JeuVideoDto {
 
     private ConsoleDto console;
 
+    private String jaquette;
+
 
     public JeuVideoDto() {
+        this.nom = "";
+        dateDeSortie = new Date();
     }
 
     /**
@@ -115,6 +119,14 @@ public class JeuVideoDto {
                 ", dateDeSortie=" + dateDeSortie +
                 ", console=" + console +
                 '}';
+    }
+
+    public String getJaquette() {
+        return jaquette;
+    }
+
+    public void setJaquette(String jaquette) {
+        this.jaquette = jaquette;
     }
 
 }

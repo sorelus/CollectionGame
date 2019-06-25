@@ -54,8 +54,10 @@
         </div>
     </c:if>
 
+
     <form:form method="POST"
-               action="/create_jeu" modelAttribute="editJeu">
+               action="/create_jeu" modelAttribute="editJeu" enctype="multipart/form-data">
+
         <div class="form-group">
             <label for="nom"> <spring:message code="jeu.creer.nom.value"/>*</label>
             <spring:message code="jeu.creer.nom.placeholder" var="placeholder"/>
@@ -64,7 +66,8 @@
         <div class="form-group">
             <label for="editeur"><spring:message code="jeu.creer.fabricant.value"/></label>
             <spring:message code="jeu.creer.fabricant.placeholder" var="placeholder"/>
-            <form:input path="editeur" class="form-control" id="editeur" placeholder='${placeholder}' name="editeur"/>
+            <form:input path="editeur" class="form-control" id="editeur" placeholder='${placeholder}'
+                        name="editeur"/>
         </div>
 
         <div class="form-group">
@@ -72,14 +75,29 @@
             <form:input path="dateDeSortie" type="date" class="form-control date" id="dateDeSortie"
                         placeholder="Entrez la date de creation du jeu" name="dateDeSortie" required="required"/>
         </div>
+        <div class="form-group col-md-3">
+            <label for="dateDeSortie"><spring:message code="console.creer.jaquette.value"/></label>
+            <div class="">
+                <c:choose>
+                    <c:when test="${not empty editJeu.jaquette}">
+                        <img src="public/downloads/${editJeu.jaquette}" style="width: 100%;height:250pt;min-width: 250px;" id="image" />
+                    </c:when>
+                    <c:otherwise>
+                        <img src="images/images.png" style="width: 100%;height:250pt;min-width: 250px; " id="image" />
+                    </c:otherwise>
+                </c:choose>
+            </div>
+            <input type="file" class="form-control-file" id="file" name="file" accept=".jpg,.jpeg,.png"/>
+        </div>
+        <form:input type="hidden" name="jaquette" path="jaquette"/>
         <form:input type="hidden" name="id" path="id"/>
+
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
         <button type="submit" class="btn btn-secondary btn-block"><spring:message
                 code="console.creer.button.enregistrer.value"/></button>
 
         <br/><br/>
     </form:form>
-
 </div>
 
 </body>
@@ -91,4 +109,21 @@
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
 <script src="/js/bootstrap.js"></script>
+<script>
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function(e) {
+                $('#image').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#file").change(function() {
+        readURL(this);
+    });
+</script>
 </html>

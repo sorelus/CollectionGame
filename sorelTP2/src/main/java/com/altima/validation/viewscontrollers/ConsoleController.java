@@ -1,4 +1,5 @@
 package com.altima.validation.viewscontrollers;
+
 import com.altima.validation.App;
 import com.altima.validation.dtos.entities.ConsoleDto;
 import com.altima.validation.services.ConsoleService;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import java.util.List;
@@ -28,7 +30,7 @@ public class ConsoleController {
 
     private String modelAttribListConsole = "consoles";
 
-    @GetMapping({UrlsControllers.createConsoleURL})
+    @GetMapping({UrlsControllers.CREATE_CONSOLE_URL})
     public String create(Model model, @RequestParam(value = "console", required = false) String consoleName) {
         ConsoleDto console = null;
         try {
@@ -48,7 +50,7 @@ public class ConsoleController {
         return "console/create_console";
     }
 
-    @PostMapping({UrlsControllers.createConsoleURL})
+    @PostMapping({UrlsControllers.CREATE_CONSOLE_URL})
     public String edit(@ModelAttribute("editConsole") ConsoleDto console, Model model) {
         boolean consoleSave = true;
         Set<ConstraintViolation<ConsoleDto>> constraintViolations = Validation.buildDefaultValidatorFactory().getValidator().validate(console);
@@ -73,7 +75,7 @@ public class ConsoleController {
         return "console/create_console";
     }
 
-    @GetMapping({UrlsControllers.listConsoleURL})
+    @GetMapping({UrlsControllers.LIST_CONSOLE_URL})
     public String list(Model model) {
         try {
             List<ConsoleDto> consoles = consoleService.getAllOrderByDate();
@@ -86,7 +88,7 @@ public class ConsoleController {
         return "console/list_consoles";
     }
 
-    @GetMapping({UrlsControllers.findConsoleURL})
+    @GetMapping({UrlsControllers.FIND_CONSOLE_URL})
     public String find(Model model, @RequestParam(value = "console", required = false) String consoleName) {
         ConsoleDto console = null;
         boolean find = true;

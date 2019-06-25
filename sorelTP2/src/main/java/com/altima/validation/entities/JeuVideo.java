@@ -27,6 +27,8 @@ public class JeuVideo {
     @ManyToOne(fetch = FetchType.EAGER)
     private Console console;
 
+    private String jaquette;
+
     // constructor use by JPA/Hibernate to instance new console
     public JeuVideo() {
     }
@@ -107,5 +109,13 @@ public class JeuVideo {
                 ", dateDeSortie=" + dateDeSortie +
                 ", console=" + console +
                 '}';
+    }
+
+    public String getJaquette() {
+        return jaquette;
+    }
+
+    public void setJaquette(String jaquette) {
+        this.jaquette = jaquette;
     }
 }

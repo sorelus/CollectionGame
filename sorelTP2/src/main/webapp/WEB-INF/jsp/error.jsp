@@ -7,7 +7,7 @@
     <title><spring:message code="site.title"/></title>
     <link href="/css/bootstrap.css" rel="stylesheet"/>
     <link href="/css/main.css" rel="stylesheet"/>
-    <link rel="icon" href="images/app-box.png">
+    <link rel="icon" href="/images/app-box.png">
 </head>
 <body class="body">
 <%@ include file="part/menu.jsp" %>

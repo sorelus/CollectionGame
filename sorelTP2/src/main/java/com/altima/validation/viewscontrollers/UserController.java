@@ -8,6 +8,7 @@ import com.altima.validation.services.JeuVideoService;
 import com.altima.validation.services.UserService;
 import com.altima.validation.utilis.HashPassword;
 import com.altima.validation.utilis.JeuException;
+import com.altima.validation.utilis.SimpleEncode;
 import com.altima.validation.utilis.UrlsControllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -37,24 +38,29 @@ public class UserController {
     private UserService userService;
 
     @Autowired
+    private SimpleEncode simpleEncode;
+
+    @Autowired
     private JeuVideoService jeuVideoService;
 
-    private String listUsersValue = "users";
+    private String modelAttribListUsersValue = "users";
+    private String modelAttribErrorJeu = "errorJeu";
+    private String modelAttribEditUser = "editUser";
 
     @PreAuthorize("hasAuthority('admin')")
-    @GetMapping({UrlsControllers.createUserURL})
+    @GetMapping({UrlsControllers.CREATE_USER_URL})
     public String create(Model model, @RequestParam(value = "login", required = false) String login) {
-        return createInter(model, login, UrlsControllers.createUserURL);
+        return createInter(model, login, UrlsControllers.CREATE_USER_URL);
     }
 
     @PreAuthorize("hasAuthority('admin')")
-    @PostMapping({UrlsControllers.createUserURL})
+    @PostMapping({UrlsControllers.CREATE_USER_URL})
     public String update(@ModelAttribute(value = "editUser") UserDto user, Model model) {
-        return updateInter(user, model, UrlsControllers.createUserURL);
+        return updateInter(user, model, UrlsControllers.CREATE_USER_URL);
     }
 
     @PreAuthorize("hasAuthority('admin')")
-    @GetMapping({UrlsControllers.listUserURL})
+    @GetMapping({UrlsControllers.LIST_USER_URL})
     public String list(Model model) {
         List<UserDto> users = null;
         try {
@@ -62,36 +68,36 @@ public class UserController {
         } catch (JeuException ex) {
             App.APPLOGGER.log(Level.SEVERE, ex.getMessage());
         }
-        model.addAttribute(listUsersValue, users);
+        model.addAttribute(modelAttribListUsersValue, users);
         return "user/list_users";
     }
 
     @PreAuthorize("hasAuthority('admin')")
-    @GetMapping({UrlsControllers.linkUserURL})
+    @GetMapping({UrlsControllers.LINK_USER_URL})
     public String listJeux(Model model, @RequestParam(value = "login", required = false) String login) {
-        return showListJeux(model, login, UrlsControllers.linkUserURL, UrlsControllers.deleteUserURL);
+        return showListJeux(model, login, UrlsControllers.LINK_USER_URL, UrlsControllers.DELETE_USER_URL);
 
     }
 
     @PreAuthorize("hasAuthority('admin')")
-    @PostMapping({UrlsControllers.linkUserURL})
+    @PostMapping({UrlsControllers.LINK_USER_URL})
     public ModelAndView listJeuxPost(RedirectAttributes attributes, @RequestParam(value = "jeu") int jeu, @RequestParam(value = "login") String login) {
         return showListJeuxPost(attributes, jeu, login, "/list_jeux_user");
     }
 
     @PreAuthorize("hasAuthority('admin')")
-    @PostMapping({UrlsControllers.deleteUserURL})
+    @PostMapping({UrlsControllers.DELETE_USER_URL})
     public RedirectView deleteJeu(RedirectAttributes attributes, @RequestParam(value = "jeu") int jeu, @RequestParam(value = "login") String login) {
 
-        return showDeleteJeu(attributes, jeu, login, UrlsControllers.linkUserURL);
+        return showDeleteJeu(attributes, jeu, login, UrlsControllers.LINK_USER_URL);
     }
 
 
-    @PostMapping({UrlsControllers.simpleCreateUserURL})
+    @PostMapping({UrlsControllers.SIMPLE_CREATE_USER_URL})
     public String registrationUpdate(@ModelAttribute(value = "editUser") UserDto user, Model model) {
         String ret = registerUpdate(user, model);
         Map<String, Object> modelMap = model.asMap();
-        Object bool = modelMap.get("errorJeu");
+        Object bool = modelMap.get(modelAttribErrorJeu);
 
         if (bool == null || !(Boolean) bool)
             ret = "confirmation";
@@ -99,47 +105,47 @@ public class UserController {
         return ret;
     }
 
-    @GetMapping({UrlsControllers.simpleCreateUserURL})
+    @GetMapping({UrlsControllers.SIMPLE_CREATE_USER_URL})
     public String registration(Model model) {
-        return createInter(model, "", UrlsControllers.simpleCreateUserURL);
+        return createInter(model, "", UrlsControllers.SIMPLE_CREATE_USER_URL);
     }
 
     @PreAuthorize("hasAuthority('simple')")
-    @PostMapping({UrlsControllers.simpleUpdateProfile})
+    @PostMapping({UrlsControllers.SIMPLE_UPDATE_PROFILE})
     public String registerUpdate(@ModelAttribute(value = "editUser") UserDto user, Model model) {
 
-        String ret = updateInter(user, model, UrlsControllers.simpleCreateUserURL);
+        String ret = updateInter(user, model, UrlsControllers.SIMPLE_CREATE_USER_URL);
         user.setPass("");
-        model.addAttribute("editUser", user);
+        model.addAttribute(modelAttribEditUser, user);
         return ret;
     }
 
     @PreAuthorize("hasAuthority('simple')")
-    @GetMapping({UrlsControllers.simpleUpdateProfile})
+    @GetMapping({UrlsControllers.SIMPLE_UPDATE_PROFILE})
     public String updateProfile(Model model, Principal principal) {
         String login = principal.getName();
-        return createInter(model, login, UrlsControllers.simpleUpdateProfile);
+        return createInter(model, login, UrlsControllers.SIMPLE_UPDATE_PROFILE);
     }
 
     @PreAuthorize("hasAuthority('simple')")
-    @GetMapping({UrlsControllers.simpleListGameURL})
+    @GetMapping({UrlsControllers.SIMPLE_LIST_GAME_URL})
     public String mesJeux(Model model, Principal principal) {
         String login = principal.getName();
-        return showListJeux(model, login, UrlsControllers.simpleListGameURL, UrlsControllers.simpleDeleteUserURL);
+        return showListJeux(model, login, UrlsControllers.SIMPLE_LIST_GAME_URL, UrlsControllers.SIMPLE_DELETE_USER_URL);
     }
 
     @PreAuthorize("hasAuthority('simple')")
-    @PostMapping({UrlsControllers.simpleListGameURL})
+    @PostMapping({UrlsControllers.SIMPLE_LIST_GAME_URL})
     public ModelAndView mesJeuxPost(Principal principal, RedirectAttributes attributes, @RequestParam(value = "jeu") int jeu) {
         String login = principal.getName();
-        return showListJeuxPost(attributes, jeu, login, UrlsControllers.simpleListGameURL);
+        return showListJeuxPost(attributes, jeu, login, UrlsControllers.SIMPLE_LIST_GAME_URL);
     }
 
     @PreAuthorize("hasAuthority('simple')")
-    @PostMapping({UrlsControllers.simpleDeleteUserURL})
+    @PostMapping({UrlsControllers.SIMPLE_DELETE_USER_URL})
     public RedirectView deleteMesJeuxPost(Principal principal, Model model, RedirectAttributes attributes, @RequestParam(value = "jeu") int jeu) {
         String login = principal.getName();
-        return showDeleteJeu(attributes, jeu, login, UrlsControllers.simpleListGameURL);
+        return showDeleteJeu(attributes, jeu, login, UrlsControllers.SIMPLE_LIST_GAME_URL);
     }
 
 
@@ -170,26 +176,28 @@ public class UserController {
         }
         try {
             // hash password before save
-            user.setPass(HashPassword.getHash(user.getPass()));
-            if (user.getId() != null) {
-                UserDto userTemp = userService.getById(user.getId());
+            if (user != null) {
+                user.setPass(HashPassword.getHash(user.getPass()));
+                if (user.getId() != null) {
+                    UserDto userTemp = userService.getById(user.getId());
 
-                if (userTemp != null) {
-                    user.setCollection(userTemp.getCollection());
+                    if (userTemp != null) {
+                        user.setCollection(userTemp.getCollection());
+                    }
+                }
+
+                if (!error) {
+                    userService.saveUser(user);
                 }
             }
-
-            if (!error) {
-                userService.saveUser(user);
-            }
             List<UserDto> users = userService.getAllUsers();
-            model.addAttribute(listUsersValue, users);
+            model.addAttribute(modelAttribListUsersValue, users);
         } catch (JeuException | NoSuchAlgorithmException ex) {
             error = true;
             App.APPLOGGER.log(Level.SEVERE, ex.getMessage());
         }
-        model.addAttribute("errorJeu", error);
-        model.addAttribute("editUser", userDto);
+        model.addAttribute(modelAttribErrorJeu, error);
+        model.addAttribute(modelAttribEditUser, userDto);
         model.addAttribute("action", action);
         return "user/create_user";
     }
@@ -252,7 +260,7 @@ public class UserController {
         try {
             List<UserDto> users = userService.getAllUsers();
             if (users != null) {
-                model.addAttribute(listUsersValue, users);
+                model.addAttribute(modelAttribListUsersValue, users);
             }
             if (login != null && login.length() != 0) {
                 userDto = userService.getByLogin(login);
@@ -260,14 +268,16 @@ public class UserController {
 
         } catch (JeuException ex) {
             error = true;
-            model.addAttribute("errorJeu", error);
+            model.addAttribute(modelAttribErrorJeu, error);
         }
         if (userDto != null) {
+            //add information for public url
+            model.addAttribute("userIdEncode", simpleEncode.encode(userDto.getId().toString()));
             userDto.setPass("");
         } else {
             userDto = new UserDto();
         }
-        model.addAttribute("editUser", userDto);
+        model.addAttribute(modelAttribEditUser, userDto);
         return model;
     }
 

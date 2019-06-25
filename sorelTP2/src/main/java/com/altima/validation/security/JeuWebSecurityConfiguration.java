@@ -12,15 +12,12 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.web.firewall.HttpFirewall;
-import org.springframework.security.web.firewall.StrictHttpFirewall;
 
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(
-        prePostEnabled = true,// to use PreAuthorize annotation
-        securedEnabled = true,// to use secured annotation
-        jsr250Enabled = true)
+        prePostEnabled = true// to use PreAuthorize annotation
+         )
 public class JeuWebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -33,9 +30,10 @@ public class JeuWebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
+        http/*.csrf().disable()*/
                 .authorizeRequests()
-                .antMatchers("/registration").permitAll()
+                .antMatchers("/registration","/error").permitAll()
+                .antMatchers("/public/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling().accessDeniedPage("/accessDenied")
@@ -62,17 +60,9 @@ public class JeuWebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
-        web.httpFirewall(allowUrlEncodedSlashHttpFirewall());
 
     }
 
-    // allow url zith slash
-    @Bean
-    public HttpFirewall allowUrlEncodedSlashHttpFirewall() {
-        StrictHttpFirewall fireWall = new StrictHttpFirewall();
-        fireWall.setAllowUrlEncodedSlash(true);
-        return fireWall;
-    }
 
 }
 

@@ -9,10 +9,6 @@ import java.security.NoSuchAlgorithmException;
 import java.util.logging.Level;
 
 public class HashPassword implements PasswordEncoder {
-    public HashPassword() {
-
-    }
-
     public static String getHash(String pass) throws NoSuchAlgorithmException {
         // get hash to bits
         MessageDigest digest = MessageDigest.getInstance("SHA-256");

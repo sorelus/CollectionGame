@@ -2,34 +2,27 @@ package com.altima.validation.utilis;
 
 public class UrlsControllers {
 
-    // for console
-    public final static String createConsoleURL = "/create_console";
-    public final static String listConsoleURL = "/list_console";
-    public final static String findConsoleURL = "/find_console";
+    // for Console
+    public static final String CREATE_CONSOLE_URL = "/create_console";
+    public static final String LIST_CONSOLE_URL = "/list_console";
+    public static final String FIND_CONSOLE_URL = "/find_console";
 
     // for JeuVideo
-    public final static String createJeuURL = "/create_jeu";
-    public final static String listJeuURL = "/list_jeu";
-    public final static String findJeuURL = "/find_jeu";
-    public final static String linkJeuURL = "/lier_jeu";
+    public static final String CREATE_JEU_URL = "/create_jeu";
+    public static final String LIST_JEU_URL = "/list_jeu";
+    public static final String FIND_JEU_URL = "/find_jeu";
+    public static final String LINK_JEU_URL = "/lier_jeu";
 
     // for User
-    public final static String createUserURL = "/create_user";
-    public final static String listUserURL = "/list_user";
-    public final static String linkUserURL = "/list_jeux_user";
-    public final static String deleteUserURL = "/delete_jeu";
+    public static final String CREATE_USER_URL = "/create_user";
+    public static final String LIST_USER_URL = "/list_user";
+    public static final String LINK_USER_URL = "/list_jeux_user";
+    public static final String DELETE_USER_URL = "/delete_jeu";
+    public static final String SIMPLE_CREATE_USER_URL = "/registration";
+    public static final String SIMPLE_UPDATE_PROFILE = "/update_profile";
+    public static final String SIMPLE_LIST_GAME_URL = "/my_game";
+    public static final String SIMPLE_DELETE_USER_URL = "/delete_my_game";
+    public static final  String DOWNLOAD_FILE = "/downloads/{imageId}";
 
 
-    public final static String simpleCreateUserURL = "/registration";
-    public final static String simpleUpdateProfile = "/update_profile";
-    public final static String simpleListGameURL = "/my_game";
-    public final static String simpleDeleteUserURL = "/delete_my_game";
-
-    public static String getCreateConsoleURL() {
-        return createConsoleURL;
-    }
-
-    public static void setCreateConsoleURL() {
-
-    }
 }

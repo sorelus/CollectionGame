@@ -1,6 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
+<%--get url--%>
+<c:set var="url" value="${pageContext.request.serverName}"/>
+<c:set var="port" value="${pageContext.request.serverPort}"/>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -37,63 +41,42 @@
         <hr class="barre"/>
     </security:authorize>
     <br/>
-    <div class="input-group mb-2 mr-sm-2">
-        <button type="button" class="btn btn-success" onclick="cacher()"><spring:message
-                code="user.list.add.jeu"/></button>
-    </div>
-    <div id="addJeux" style="display:none">
-        <form action="${PostAction1}" method="POST">
-            <div class="input-group mb-2 mr-sm-2">
-                <select name="jeu" class="custom-select" id="jeux">
-                    <option><spring:message code="user.list.select"/></option>
-                    <c:forEach items="${jeux}" var="temp">
-                        <option value="${temp.id}">${temp.nom}</option>
-                    </c:forEach>
-                </select>
-                <input type="hidden" value="${editUser.login}" name="login"/>
-                <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                <button type="submit" class="btn btn-success">
-                    <spring:message code="user.list.add.jeu.aj"/></button>
+    <c:if test="${not empty editUser.login}">
+        <div class="input-group mb-2 mr-sm-2">
+            <button type="button" class="btn btn-success" onclick="cacher()"><spring:message
+                    code="user.list.add.jeu"/></button>
+        </div>
+        <div id="addJeux" style="display:none">
+            <form action="${PostAction1}" method="POST">
+                <div class="input-group mb-2 mr-sm-2">
+                    <select name="jeu" class="custom-select" id="jeux">
+                        <option><spring:message code="user.list.select"/></option>
+                        <c:forEach items="${jeux}" var="temp">
+                            <option value="${temp.id}">${temp.nom}</option>
+                        </c:forEach>
+                    </select>
+                    <input type="hidden" value="${editUser.login}" name="login"/>
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+                    <button type="submit" class="btn btn-success">
+                        <spring:message code="user.list.add.jeu.aj"/></button>
+                </div>
+            </form>
+        </div>
+        <hr class="barre"/>
+        <%--<c:if test="${not empty publicLink}">--%>
+        <div class="input-group mb-2">
+            <div class="input-group-prepend">
+                <div class="input-group-text"><spring:message code="jeu.list.public.partage"/></div>
             </div>
-        </form>
+            <c:set var="publicUrl" value="${url}:${port}/public/${userIdEncode}"/>
+            <label class="form-control btn-secondary">${publicUrl}</label>
+        </div>
+        <%--  </c:if>--%>
+        <c:set var="collection" scope="request" value="${editUser.collection}"/>
+        <c:set var="owner" scope="request" value="yes"/>
+        <%@ include file="../part/listerJeux.jsp" %>
+    </c:if>
 
-    </div>
-
-
-    <table class="table table-bordered">
-        <thead class="thead-dark">
-        <tr>
-            <th scope="col">#</th>
-            <th scope="col"><spring:message code="jeu.creer.nom.value"/></th>
-            <th scope="col"><spring:message code="jeu.creer.fabricant.value"/></th>
-            <th scope="col"><spring:message code="jeu.list.console"/></th>
-            <th scope="col"><spring:message code="console.creer.date.value"/></th>
-            <th scope="col">***</th>
-        </tr>
-        </thead>
-        <tbody>
-        <c:forEach var="jeu" items="${editUser.collection}">
-            <tr>
-                <th scope="row">${jeu.id}</th>
-                <td>${jeu.nom}</td>
-                <td>${jeu.editeur}</td>
-                <td>${jeu.console.nom}</td>
-                <td>${jeu.dateDeSortie}</td>
-                <td>
-                    <form action="${PostAction2}" method="POST">
-                        <input type="hidden" value="${jeu.id}" name="jeu"/>
-                        <input type="hidden" value="${editUser.login}" name="login"/>
-                        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                        <button type="submit" class="btn btn-danger btn-block">
-                            <spring:message code="user.list.delete.jeu"/>
-                        </button>
-                    </form>
-                </td>
-            </tr>
-        </c:forEach>
-        </tbody>
-
-    </table>
 
 </div>
 </body>
