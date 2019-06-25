@@ -30,8 +30,6 @@ public class UploadManager {
         String specialName =null;
         String extension = FilenameUtils.getExtension(file.getOriginalFilename());
         if(extension!=null){
-
-
         ArrayList<String> validExtension = new ArrayList<>();
         validExtension.add("jpg");
         validExtension.add("jpeg");

@@ -17,8 +17,7 @@
 
 
     <img src="images/game.png" class="displayed"/>
-    <%-- <img src="images/bienvenue.png" style="   width: 80%;height: auto; margin-left: auto; margin-right: auto;"/>--%>
-</div>
+   </div>
 </body>
 <script src="/js/main.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

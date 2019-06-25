@@ -41,7 +41,7 @@
     </c:choose>
 
     <form method="POST"
-          action="/lier_jeu">
+          action="${UrlsControllers.LINK_JEU_URL}">
         <label for="jeu"><spring:message code="jeu.creer.enregistrer"/></label>
         <div class="input-group mb-2 mr-sm-2">
             <select name="jeu" class="custom-select " id="jeu">

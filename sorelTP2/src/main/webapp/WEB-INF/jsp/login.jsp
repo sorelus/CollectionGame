@@ -1,7 +1,8 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-
+<%--for use constant urls directly here--%>
+<%@ page import="com.altima.validation.utilis.UrlsControllers" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 
 <!DOCTYPE html>
@@ -35,7 +36,7 @@
             <br/><br/>
 
             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-            <h6 class="text-center"><a href="/registration"><spring:message  code="create.compte.value"/></a></h6>
+            <h6 class="text-center"><a href="${UrlsControllers.SIMPLE_CREATE_USER_URL}"><spring:message  code="create.compte.value"/></a></h6>
             <button class="btn btn-lg btn-secondary btn-block" type="submit"><spring:message code="user.login.button"/></button>
             <br/>
     </form>

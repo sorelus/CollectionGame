@@ -7,9 +7,9 @@
 <head>
     <meta charset="UTF-8">
     <title><spring:message code="site.title"/></title>
-    <link href="css/bootstrap.css" rel="stylesheet"/>
-    <link href="css/main.css" rel="stylesheet"/>
-    <link rel="icon" href="images/app-box.png">
+    <link href="/css/bootstrap.css" rel="stylesheet"/>
+    <link href="/css/main.css" rel="stylesheet"/>
+    <link rel="icon" href="/images/app-box.png">
 </head>
 <body class="body">
 <%@ include file="../part/menu.jsp" %>
@@ -19,7 +19,7 @@
     </div>
     <security:authorize access="hasAuthority('admin')">
         <form method="GET"
-              action="create_user">
+              action=${UrlsControllers.CREATE_USER_URL}>
             <label for="search"><spring:message code="user.creer.enregistrer"/></label>
             <div class="input-group mb-2 mr-sm-2">
                 <select name="login" class="custom-select " id="search">
@@ -112,14 +112,14 @@
 </div>
 
 </body>
-<script src="js/main.js"></script>
+<script src="/js/main.js"></script>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
         integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
-<script src="js/bootstrap.js"></script>
+<script src="/js/bootstrap.js"></script>
 
 <script>
     <spring:message code="user.creer.confirm.error.value" var="errorVal"/>

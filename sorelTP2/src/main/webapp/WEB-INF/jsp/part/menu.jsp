@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1" %>
 <%@ taglib prefix="security"  uri="http://www.springframework.org/security/tags" %>
+<%--for use constant urls directly here--%>
+<%@ page import="com.altima.validation.utilis.UrlsControllers" %>
 <nav class="navbar navbar-expand-lg navbar-light  fixed-top" style="background-color: #e3f2fd;">
     <a class="navbar-brand" href="/">
         <img src="/images/app-box.png" width="30" height="30" class="d-inline-block align-top" alt="">
@@ -9,10 +11,6 @@
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-
-    <%--direct use of urls in menu--%>
-    <jsp:useBean id="urls" class="com.altima.validation.utilis.UrlsControllers" scope="session">
-    </jsp:useBean>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
@@ -24,11 +22,10 @@
                             <spring:message code="menu.jeu.title"/>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <%--<a class="dropdown-item" href="${urls.CREATE_CONSOLE_URL}"><spring:message code="menu.jeu.m1"/></a>--%>
-                            <a class="dropdown-item" href="/create_jeu"><spring:message code="menu.jeu.m1"/></a>
-                            <a class="dropdown-item" href="/find_jeu"><spring:message code="menu.jeu.m2"/></a>
-                            <a class="dropdown-item" href="/list_jeu"><spring:message code="menu.jeu.m3"/></a>
-                            <a class="dropdown-item" href="/lier_jeu"><spring:message code="menu.jeu.m4"/> </a>
+                            <a class="dropdown-item" href="${UrlsControllers.CREATE_JEU_URL}"><spring:message code="menu.jeu.m1"/></a>
+                            <a class="dropdown-item" href="${UrlsControllers.FIND_JEU_URL}"><spring:message code="menu.jeu.m2"/></a>
+                            <a class="dropdown-item" href="${UrlsControllers.LIST_JEU_URL}"><spring:message code="menu.jeu.m3"/></a>
+                            <a class="dropdown-item" href="${UrlsControllers.LINK_JEU_URL}"><spring:message code="menu.jeu.m4"/> </a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
@@ -37,9 +34,9 @@
                             <spring:message code="menu.console.title"/>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="/create_console"><spring:message code="menu.console.m1"/></a>
-                            <a class="dropdown-item" href="/find_console"><spring:message code="menu.console.m2"/></a>
-                            <a class="dropdown-item" href="/list_console"><spring:message code="menu.console.m3"/></a>
+                            <a class="dropdown-item" href="${UrlsControllers.CREATE_CONSOLE_URL}"><spring:message code="menu.console.m1"/></a>
+                            <a class="dropdown-item" href="${UrlsControllers.FIND_CONSOLE_URL}"><spring:message code="menu.console.m2"/></a>
+                            <a class="dropdown-item" href="${UrlsControllers.LIST_CONSOLE_URL}"><spring:message code="menu.console.m3"/></a>
                         </div>
                     </li>
                     <li class="nav-item dropdown">
@@ -48,9 +45,9 @@
                             <spring:message code="menu.user.title"/>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="/create_user"><spring:message code="menu.user.m1"/></a>
-                            <a class="dropdown-item" href="/list_user"><spring:message code="menu.user.m2"/></a>
-                            <a class="dropdown-item" href="/list_jeux_user"><spring:message code="menu.user.m3"/></a>
+                            <a class="dropdown-item" href="${UrlsControllers.CREATE_USER_URL}"><spring:message code="menu.user.m1"/></a>
+                            <a class="dropdown-item" href="${UrlsControllers.LIST_USER_URL}"><spring:message code="menu.user.m2"/></a>
+                            <a class="dropdown-item" href="${UrlsControllers.LINK_USER_URL}"><spring:message code="menu.user.m3"/></a>
                         </div>
                     </li>
                 </security:authorize>
@@ -69,8 +66,8 @@
                     </a>
 
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                        <a class="dropdown-item" href="/my_game"><spring:message code="menu.user.profile.list.jeu"/></a>
-                        <a class="dropdown-item" href="/update_profile"><spring:message code="menu.user.profile.edit"/></a>
+                        <a class="dropdown-item" href="${UrlsControllers.SIMPLE_LIST_GAME_URL}"><spring:message code="menu.user.profile.list.jeu"/></a>
+                        <a class="dropdown-item" href="${UrlsControllers.SIMPLE_UPDATE_PROFILE}"><spring:message code="menu.user.profile.edit"/></a>
                         <form action="/logout" method="post">
                             <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
                             <button class="dropdown-item" type="submit"><spring:message code="menu.user.quitter"/></button>

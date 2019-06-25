@@ -19,7 +19,7 @@
     </div>
 
     <form method="GET"
-          action="/find_console">
+          action="${UrlsControllers.FIND_CONSOLE_URL}">
         <label for="search"><spring:message code="console.search.nom"/></label>
         <div class="input-group mb-2 mr-sm-2">
             <input type="text" class="form-control" id="search" name="console" placeholder=""/>

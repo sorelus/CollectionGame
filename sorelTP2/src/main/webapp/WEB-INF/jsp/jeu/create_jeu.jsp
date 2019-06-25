@@ -19,7 +19,7 @@
     </div>
 
     <form method="GET"
-          action="/create_jeu">
+          action="${UrlsControllers.CREATE_JEU_URL}">
         <label for="search"><spring:message code="jeu.creer.enregistrer"/></label>
         <div class="input-group mb-2 mr-sm-2">
             <select name="jeu" class="custom-select " id="search">
@@ -56,7 +56,7 @@
 
 
     <form:form method="POST"
-               action="/create_jeu" modelAttribute="editJeu" enctype="multipart/form-data">
+               action="${UrlsControllers.CREATE_JEU_URL}" modelAttribute="editJeu" enctype="multipart/form-data">
 
         <div class="form-group">
             <label for="nom"> <spring:message code="jeu.creer.nom.value"/>*</label>
@@ -80,13 +80,14 @@
             <div class="">
                 <c:choose>
                     <c:when test="${not empty editJeu.jaquette}">
-                        <img src="public/downloads/${editJeu.jaquette}" style="width: 100%;height:250pt;min-width: 250px;" id="image" />
+                        <img src="/public/downloads/${editJeu.jaquette}" style="width: 100%;height:250pt;min-width: 250px;" id="image" />
                     </c:when>
                     <c:otherwise>
-                        <img src="images/images.png" style="width: 100%;height:250pt;min-width: 250px; " id="image" />
+                        <img src="/images/images.png" style="width: 100%;height:250pt;min-width: 250px; " id="image" />
                     </c:otherwise>
                 </c:choose>
             </div>
+            <font color="red"><div style="display: none" id="errorLoad"><spring:message code="fichier.erreur.size"/></div></font>
             <input type="file" class="form-control-file" id="file" name="file" accept=".jpg,.jpeg,.png"/>
         </div>
         <form:input type="hidden" name="jaquette" path="jaquette"/>
@@ -121,9 +122,18 @@
             reader.readAsDataURL(input.files[0]);
         }
     }
-
+ /*small code for control jaquette size*/
+    var blocAdd = document.getElementById("errorLoad");
     $("#file").change(function() {
-        readURL(this);
+        blocAdd.style.display = "none";
+        if(this.files[0].size > 10240000){
+                blocAdd.style.display = "block";
+                this.value = "";
+            this.value = "";
+        }else{
+            readURL(this);
+        }
     });
+
 </script>
 </html>

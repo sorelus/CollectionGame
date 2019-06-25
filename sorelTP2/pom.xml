@@ -4,7 +4,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.altima.validation</groupId>
     <artifactId>sorel.tp2</artifactId>
-    <version>0.0.5</version>
+    <version>0.0.6</version>
     <packaging>war</packaging>
     <name>Game-Collection</name>
     <description>Tp pour la validation des acquis by Sorel</description>

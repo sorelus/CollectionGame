@@ -82,7 +82,7 @@ public class UserController {
     @PreAuthorize("hasAuthority('admin')")
     @PostMapping({UrlsControllers.LINK_USER_URL})
     public RedirectView listJeuxPost(RedirectAttributes attributes, @RequestParam(value = "jeu") int jeu, @RequestParam(value = "login") String login) {
-        return showListJeuxPost(attributes, jeu, login, "/list_jeux_user");
+        return showListJeuxPost(attributes, jeu, login, UrlsControllers.SIMPLE_LIST_GAME_URL);
     }
 
     @PreAuthorize("hasAuthority('admin')")
@@ -131,6 +131,7 @@ public class UserController {
     @GetMapping({UrlsControllers.SIMPLE_LIST_GAME_URL})
     public String mesJeux(Model model, Principal principal) {
         String login = principal.getName();
+        model.addAttribute("owner", true);
         return showListJeux(model, login, UrlsControllers.SIMPLE_LIST_GAME_URL, UrlsControllers.SIMPLE_DELETE_USER_URL);
     }
 

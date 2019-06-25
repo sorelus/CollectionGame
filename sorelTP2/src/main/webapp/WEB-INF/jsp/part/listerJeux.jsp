@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page import="com.altima.validation.utilis.UrlsControllers" %>
 <div class="row">
     <c:forEach var="jeu" items="${collection}">
 
@@ -40,7 +41,7 @@
             <security:authorize access="hasAuthority('simple')">
                 <security:authorize access="hasAuthority('admin')">
                     <div>
-                        <form action="/create_jeu" method="GET">
+                        <form action="${UrlsControllers.CREATE_JEU_URL}" method="GET">
                             <input type="hidden" value="${jeu.nom}" name="jeu"/>
                             <button type="submit" class="btn btn-primary btn-block">
                                 <spring:message code="user.list.upload.jeu"/>

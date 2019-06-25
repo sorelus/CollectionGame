@@ -19,7 +19,7 @@
     </div>
 
     <form method="GET"
-          action="/create_console">
+          action="${UrlsControllers.CREATE_CONSOLE_URL}">
         <label for="search"><spring:message code="console.creer.enregistrerconsole"/></label>
         <div class="input-group mb-2 mr-sm-2">
             <select name="console" class="custom-select " id="search">
@@ -56,7 +56,7 @@
     </c:if>
 
     <form:form method="POST"
-               action="/create_console" modelAttribute="editConsole">
+               action="${UrlsControllers.CREATE_CONSOLE_URL}" modelAttribute="editConsole">
         <div class="form-group">
             <label for="nom"> <spring:message code="console.creer.nom.value"/>*</label>
             <spring:message code="console.creer.nom.placeholder" var="placeholder"/>
