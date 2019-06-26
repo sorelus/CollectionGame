@@ -44,8 +44,8 @@ Comment ça fonctionne
 Nouvelles fonctions
  -----------------  
  * La liste des jeux d'une collection s'affiche avec des jaquettes de jeux.
-![alt text](exempleVue.png)
+![alt text](exemple_vue.jpg)
 
 
 * Vous pouvez partager votre collection avec n'importe qui , grace au lien de partage.
-![alt text](exempleLien.png)
+![alt text](exemple_lien.jpg)
