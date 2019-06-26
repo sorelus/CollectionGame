@@ -20,7 +20,14 @@ import java.util.List;
 import java.util.Set;
 import java.util.logging.Level;
 
-@PreAuthorize("hasAuthority('admin')")
+
+/**
+ * ConsoleController class use for all controller that edit console
+ *
+ * @author sorelus Mkounga
+ */
+
+@PreAuthorize("hasAuthority('admin')") // To use method of this controllerm user must be admin
 @Controller
 public class ConsoleController {
 
@@ -30,6 +37,12 @@ public class ConsoleController {
 
     private String modelAttribListConsole = "consoles";
 
+    /**
+     * Use for show  create console page
+     * @param model use for exchange data with jsp page
+     * @param consoleName name of console, want it is null (not exist), show only create page else show edit page
+     * @return jsp console create page
+     */
     @GetMapping({UrlsControllers.CREATE_CONSOLE_URL})
     public String create(Model model, @RequestParam(value = "console", required = false) String consoleName) {
         ConsoleDto console = null;
@@ -50,6 +63,12 @@ public class ConsoleController {
         return "console/create_console";
     }
 
+    /**
+     * Use for show  save console info (create or edit)
+     * @param model use for exchange data with jsp page
+     * @param console console information to save
+     * @return jsp console create page
+     */
     @PostMapping({UrlsControllers.CREATE_CONSOLE_URL})
     public String edit(@ModelAttribute("editConsole") ConsoleDto console, Model model) {
         boolean consoleSave = true;
@@ -75,6 +94,11 @@ public class ConsoleController {
         return "console/create_console";
     }
 
+    /**
+     * Use for show  list page
+     * @param model use for exchange data with jsp page
+     * @return jsp console list page
+     */
     @GetMapping({UrlsControllers.LIST_CONSOLE_URL})
     public String list(Model model) {
         try {
@@ -88,6 +112,12 @@ public class ConsoleController {
         return "console/list_consoles";
     }
 
+    /**
+     * Use to show  find page
+     * @param model
+     * @param consoleName console name we want to find
+     * @return jsp console find page
+     */
     @GetMapping({UrlsControllers.FIND_CONSOLE_URL})
     public String find(Model model, @RequestParam(value = "console", required = false) String consoleName) {
         ConsoleDto console = null;

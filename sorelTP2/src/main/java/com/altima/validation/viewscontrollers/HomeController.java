@@ -6,6 +6,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+/**
+ * HomeController class use to manage home page
+ *
+ * @author sorelus Mkounga
+ */
 @Controller
 public class HomeController {
 
@@ -13,11 +18,19 @@ public class HomeController {
     private MessagesHelp message;
 
 
+    /**
+     * Use to show home page
+     * @return home page
+     */
     @GetMapping({"/"})
     public String home() {
         return "home";
     }
 
+    /**
+     * Use to show login page
+     * @return login page
+     */
     @GetMapping("login")
     public String login(Model model, String error, String logout) {
 

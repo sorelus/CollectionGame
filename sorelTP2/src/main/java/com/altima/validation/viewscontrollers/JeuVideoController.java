@@ -22,6 +22,11 @@ import java.util.Set;
 import java.util.logging.Level;
 
 
+/**
+ * JeuVideoController class use to manage JeuVideo pages
+ *
+ * @author sorelus Mkounga
+ */
 @PreAuthorize("hasAuthority('admin')")
 @Controller
 public class JeuVideoController {
@@ -35,6 +40,12 @@ public class JeuVideoController {
     @Autowired
     private UploadManager uploadManager;
 
+    /**
+     * Use to show create jeuVideo page
+     * @param model use for exchange data with jsp page
+     * @param jeuName name of jeuVideo, want it is null (not exist), show only create page else show edit page
+     * @return create jeuVideo page
+     */
     @GetMapping({UrlsControllers.CREATE_JEU_URL})
     public String create(Model model, @RequestParam(value = "jeu", required = false) String jeuName) {
         JeuVideoDto jeu = null;
@@ -56,6 +67,13 @@ public class JeuVideoController {
     }
 
 
+    /**
+     * Use to save JeuVideo
+     * @param jeu  JeuVideo information to save
+     * @param model use for exchange data with jsp page
+     * @param file for jaquette image
+     * @return  create jeuVideo page
+     */
     @PostMapping({UrlsControllers.CREATE_JEU_URL})
     public String edit(@ModelAttribute("editJeu") JeuVideoDto jeu, Model model,@RequestParam("file") MultipartFile file) {
         ConsoleDto consoleDto = null;
@@ -112,6 +130,12 @@ public class JeuVideoController {
         return "jeu/create_jeu";
     }
 
+
+    /**
+     * Use to show jeuVideo list page
+     * @param model use for exchange data with jsp page
+     * @return jeuVideo list page
+     */
     @GetMapping({UrlsControllers.LIST_JEU_URL})
     public String list(Model model) {
         try {
@@ -124,6 +148,11 @@ public class JeuVideoController {
         return "jeu/list_jeux";
     }
 
+    /**
+     * Use to show "jeuVideo link with console" page
+     * @param model use for exchange data with jsp page
+     * @return "jeuVideo link with console" page
+     */
     @GetMapping({UrlsControllers.LINK_JEU_URL})
     public String lier(Model model) {
         try {
@@ -138,6 +167,13 @@ public class JeuVideoController {
         return "jeu/lier_console";
     }
 
+    /**
+     * Use to save relationship zith jeuVideo and console
+     * @param model use for exchange data with jsp page
+     * @param jeuId id of JeuVideo
+     * @param consoleId id of Console
+     * @return "jeuVideo link with console" page
+     */
     @PostMapping({UrlsControllers.LINK_JEU_URL})
     public String saveLiaison(Model model, @RequestParam(value = "jeu") int jeuId, @RequestParam(value = "console") int consoleId) {
         boolean jeuSave = false;
@@ -160,6 +196,12 @@ public class JeuVideoController {
         return "jeu/lier_console";
     }
 
+    /**
+     * Use show find jeuVideo page
+     * @param model use for exchange data with jsp page
+     * @param jeuName  jeuVideo name we want to find
+     * @return show find jeuVideo page
+     */
     @GetMapping({UrlsControllers.FIND_JEU_URL})
     public String find(Model model, @RequestParam(value = "jeu", required = false) String jeuName) {
 

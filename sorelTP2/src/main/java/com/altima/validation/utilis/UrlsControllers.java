@@ -1,5 +1,8 @@
 package com.altima.validation.utilis;
 
+/**
+ * Class  use for externalisation of url
+ */
 public class UrlsControllers {
 
     private static final String create ="/create";

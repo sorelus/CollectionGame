@@ -22,6 +22,11 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.logging.Level;
 
+/**
+ * PublicController class use to manage public pages
+ *
+ * @author sorelus Mkounga
+ */
 @Controller
 @RequestMapping(value = "public/")
 public class PublicController {
@@ -34,6 +39,11 @@ public class PublicController {
     @Autowired
     private SimpleEncode simpleEncode;
 
+    /**
+     * Use to show local file (image)
+     * @param imageId name of local image we want to download
+     * @return Data(resource)
+     */
     @RequestMapping(value = UrlsControllers.DOWNLOAD_FILE)
     public ResponseEntity<Resource> downloadFile(@PathVariable String imageId, HttpServletRequest request) {
         ResponseEntity<Resource> resourceEntity =null;
@@ -59,6 +69,11 @@ public class PublicController {
         return resourceEntity;
     }
 
+    /**
+     * Use to show share collection page
+     * @param userId  id of user collection we  want to show collection
+     * @return Data(resource)
+     */
     @GetMapping({"/{userId}"})
     public String myPublicGame(Model model, @PathVariable String userId) {
 

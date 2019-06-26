@@ -31,6 +31,12 @@ import java.util.Map;
 import java.util.Set;
 import java.util.logging.Level;
 
+
+/**
+ * UserController class use for all controller that edit User
+ *
+ * @author sorelus Mkounga
+ */
 @Controller
 public class UserController {
 
@@ -47,18 +53,29 @@ public class UserController {
     private String modelAttribErrorJeu = "errorJeu";
     private String modelAttribEditUser = "editUser";
 
+    /**
+     * Use to show create user page
+     * @param login name of local image we want to download
+     */
     @PreAuthorize("hasAuthority('admin')")
     @GetMapping({UrlsControllers.CREATE_USER_URL})
     public String create(Model model, @RequestParam(value = "login", required = false) String login) {
         return createInter(model, login, UrlsControllers.CREATE_USER_URL);
     }
 
+    /**
+     * Use to save user information we want to save
+     * @param user name of local image we want to download
+     */
     @PreAuthorize("hasAuthority('admin')")
     @PostMapping({UrlsControllers.CREATE_USER_URL})
     public String update(@ModelAttribute(value = "editUser") UserDto user, Model model) {
         return updateInter(user, model, UrlsControllers.CREATE_USER_URL);
     }
 
+    /**
+     * Use to show list user pages
+     */
     @PreAuthorize("hasAuthority('admin')")
     @GetMapping({UrlsControllers.LIST_USER_URL})
     public String list(Model model) {
@@ -72,6 +89,10 @@ public class UserController {
         return "user/list_users";
     }
 
+    /**
+     * Use to show user collection.
+     * @param login login of user we want to show collection
+     */
     @PreAuthorize("hasAuthority('admin')")
     @GetMapping({UrlsControllers.LINK_USER_URL})
     public String listJeux(Model model, @RequestParam(value = "login", required = false) String login) {
@@ -79,12 +100,22 @@ public class UserController {
 
     }
 
+    /**
+     * Use to save relationship between  user and JeuVideo
+     * @param login login of user we want to save relationship
+     * @param jeu id  of JeuVideo we want to save relationship
+     */
     @PreAuthorize("hasAuthority('admin')")
     @PostMapping({UrlsControllers.LINK_USER_URL})
     public RedirectView listJeuxPost(RedirectAttributes attributes, @RequestParam(value = "jeu") int jeu, @RequestParam(value = "login") String login) {
         return showListJeuxPost(attributes, jeu, login, UrlsControllers.SIMPLE_LIST_GAME_URL);
     }
 
+    /**
+     * Use to remove relationship between  user and JeuVideo
+     * @param login login of user we want to remove relationship
+     * @param jeu id  of JeuVideo we want to remove relationship
+     */
     @PreAuthorize("hasAuthority('admin')")
     @PostMapping({UrlsControllers.DELETE_USER_URL})
     public RedirectView deleteJeu(RedirectAttributes attributes, @RequestParam(value = "jeu") int jeu, @RequestParam(value = "login") String login) {
@@ -93,6 +124,10 @@ public class UserController {
     }
 
 
+    /**
+     * Use to edit  user Info
+     * @param user nez user information to save
+     */
     @PostMapping({UrlsControllers.SIMPLE_CREATE_USER_URL})
     public String registrationUpdate(@ModelAttribute(value = "editUser") UserDto user, Model model) {
         String ret = registerUpdate(user, model);
@@ -105,11 +140,19 @@ public class UserController {
         return ret;
     }
 
+    /**
+     * Use to show registration apge
+     */
     @GetMapping({UrlsControllers.SIMPLE_CREATE_USER_URL})
     public String registration(Model model) {
         return createInter(model, "", UrlsControllers.SIMPLE_CREATE_USER_URL);
     }
 
+
+    /**
+     * Use to save new user
+     * @param user user information to save
+     */
     @PreAuthorize("hasAuthority('simple')")
     @PostMapping({UrlsControllers.SIMPLE_UPDATE_PROFILE})
     public String registerUpdate(@ModelAttribute(value = "editUser") UserDto user, Model model) {
@@ -120,6 +163,10 @@ public class UserController {
         return ret;
     }
 
+
+    /**
+     * Use to show  edit user page
+     */
     @PreAuthorize("hasAuthority('simple')")
     @GetMapping({UrlsControllers.SIMPLE_UPDATE_PROFILE})
     public String updateProfile(Model model, Principal principal) {
@@ -127,6 +174,9 @@ public class UserController {
         return createInter(model, login, UrlsControllers.SIMPLE_UPDATE_PROFILE);
     }
 
+    /**
+     * Use to show  user collection
+     */
     @PreAuthorize("hasAuthority('simple')")
     @GetMapping({UrlsControllers.SIMPLE_LIST_GAME_URL})
     public String mesJeux(Model model, Principal principal) {
@@ -135,6 +185,10 @@ public class UserController {
         return showListJeux(model, login, UrlsControllers.SIMPLE_LIST_GAME_URL, UrlsControllers.SIMPLE_DELETE_USER_URL);
     }
 
+    /**
+     * Use to save relationship between  user and jeuVideo
+     * @param jeu id  of JeuVideo we want to save relationship
+     */
     @PreAuthorize("hasAuthority('simple')")
     @PostMapping({UrlsControllers.SIMPLE_LIST_GAME_URL})
     public RedirectView mesJeuxPost(Principal principal, RedirectAttributes attributes, @RequestParam(value = "jeu") int jeu) {
@@ -142,6 +196,10 @@ public class UserController {
         return showListJeuxPost(attributes, jeu, login, UrlsControllers.SIMPLE_LIST_GAME_URL);
     }
 
+    /**
+     * Use to remove relationship between  user and jeuVideo
+     * @param jeu id  of JeuVideo we want to remove relationship
+     */
     @PreAuthorize("hasAuthority('simple')")
     @PostMapping({UrlsControllers.SIMPLE_DELETE_USER_URL})
     public RedirectView deleteMesJeuxPost(Principal principal, Model model, RedirectAttributes attributes, @RequestParam(value = "jeu") int jeu) {
