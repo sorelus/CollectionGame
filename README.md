@@ -30,7 +30,7 @@ Compilation et execution du projet
 	* mvn clean package
 
 * Executer
-	* java -jar target/sorel.tp2-0.0.5.war
+	* java -jar target/sorel.tp2-0.0.6.war
 	* Ouvrez le navigateur et entrez http://localhost:8080
 	
 Comment ça fonctionne
@@ -41,3 +41,11 @@ Comment ça fonctionne
     * Le compte <b>admin</b> vous donne la possibilité de creer des consoles, des jeux. ces entités pourrons etre utilisées par les utilisateurs simples ( compte simple), creer et editer des utilisateurs.
     * Le compte <b> simple</b> est le compte basique , avec ce compte , on peut creer et manager (ajouter / supprimer) sa collection de jeux ( jeux prealablement crées par un admin) .
     
+Nouvelles fonctions
+ -----------------  
+ * La liste des jeux d'une collection s'affiche avec des jaquettes de jeux.
+![alt text](exempleVue.png)
+
+
+* Vous pouvez partager votre collection avec n'importe qui , grace au lien de partage.
+![alt text](exempleLien.png)
