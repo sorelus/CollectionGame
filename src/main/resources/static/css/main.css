@@ -1,0 +1,85 @@
+.hello-title {
+    color: darkgreen;
+}
+
+.body {
+    background-color: #edefef;
+}
+
+.menu {
+    background-color: #ffffff;
+}
+
+.write {
+    font-family: "Times New Roman", Times, serif;
+}
+
+.user-title {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 12px;
+}
+
+.displayed {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    height: auto;
+}
+
+.bienvenue {
+    text-align: center;
+}
+
+.entete {
+    background-color: #d8e7ff;
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.col-sm-12 {
+    width: 90%;
+    margin: 10pt;
+}
+
+hr.barre {
+    border-top: 2px solid black;
+}
+
+.solid {
+    border-style: solid;
+}
+
+.center {
+    margin-top: 8%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    background-color: #e3f2fd;
+    border-radius: 10px;
+    vertical-align: middle;
+    padding: 20pt;
+}
+
+.centerAlpha {
+    margin-top: 8%;
+    margin-left: auto;
+    margin-right: auto;
+    width: 50%;
+    border-radius: 10px;
+    vertical-align: middle;
+    padding: 20pt;
+}
+
+.switch-10{
+    margin-right: 15pt;
+}
+
+.jaquette {
+    margin-bottom: 20pt;
+    border-radius: 10px;
+    vertical-align: middle;
+    padding: 20pt;
+}
+
