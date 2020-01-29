@@ -1,4 +1,4 @@
-TP2 TEST DE VALIDATION DES ACQUIS
+TEST UTILISATION DE SPRINT BOOT II
 =================
 
 Outils de developpement
