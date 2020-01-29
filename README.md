@@ -22,11 +22,10 @@ Compilation et execution du projet
     <br/>
     <b>pass </b> :sorelus50 
     <br/>
-    Vous pouvez configurer les access DB à utiliser par l'application depuis le fichier : <i>sorelTP2/src/main/resources/application.properties</i> 
+    Vous pouvez configurer les access DB à utiliser par l'application depuis le fichier : <i>src/main/resources/application.properties</i> 
     
     
 * Compilation
-	* cd sorelTP2
 	* mvn clean package
 
 * Executer
